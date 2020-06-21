@@ -234,7 +234,7 @@ void InGame::createEnemy()
 void InGame::doBuyWindUnit(Ref*pSender)
 {
 	//레이블에서 누른 것이 바람 속성이면
-	auto test = Label::create();
+	auto istest = Label::create();
 
 	//레이블에서 누른 것이 땅 속성이면
 
