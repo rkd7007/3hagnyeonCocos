@@ -1,6 +1,7 @@
 #include "GameOver.h"
 #include "SimpleAudioEngine.h"
 #include "InGame.h"
+#include "HelloWorldScene.h"
 
 USING_NS_CC;
 
@@ -28,6 +29,23 @@ bool GameOver::init()
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("MainSound.mp3", true); //반복해서 출력
 	createBackground();
 
+	//메뉴로 돌아가기
+	auto goMenuLabel = Label::createWithSystemFont("메뉴", "DAON_2.28(L)", 20);
+	auto Unititem1 = MenuItemLabel::create(goMenuLabel, CC_CALLBACK_1(GameOver::GoMenu, this));
+	Unititem1->setColor(Color3B(0, 0, 0));
+	Unititem1->setAnchorPoint(Vec2(0, 0));
+	Unititem1->setPosition(Vec2(this->getContentSize().width - 700, 200));
+
+	//게임 나가기
+	auto exitGame = Label::createWithSystemFont("나가기", "DAON_2.28(L)", 20);
+	auto Unititem2 = MenuItemLabel::create(exitGame, CC_CALLBACK_1(GameOver::Exitgame, this));
+	Unititem2->setColor(Color3B(0, 0, 0));
+	Unititem2->setAnchorPoint(Vec2(0, 0));
+	Unititem2->setPosition(Vec2(this->getContentSize().width - 500, 200));
+
+	auto menu = Menu::create(Unititem1, Unititem2, NULL);
+	this->addChild(menu);
+
 	return true;
 }
 
@@ -53,4 +71,14 @@ void GameOver::createBackground()
 
 	//캐릭터보다 아래에 위치하도록 ZOrder 추가
 	this->addChild(voidNode, 0);	
+}
+
+void GameOver::GoMenu(Ref* sender)
+{
+	Director::getInstance()->replaceScene(HelloWorld::createScene());
+}
+
+void GameOver::Exitgame(Ref* sender)
+{
+	exit(0);
 }

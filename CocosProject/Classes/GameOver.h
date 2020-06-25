@@ -18,6 +18,8 @@ public:
     virtual bool init();
 
 	void createBackground();
+	void GoMenu(Ref* sender);
+	void Exitgame(Ref* sender);
 
     // implement the "static create()" method manually
     CREATE_FUNC(GameOver);
