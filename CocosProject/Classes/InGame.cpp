@@ -136,13 +136,13 @@ void InGame::update(float f)
 			{
 				//this->unscheduleUpdate();
 				MaxEnemy = true;
+				//10마리 이상 생성되면 오류가 남
 			}
 		}
 	}
 	else
 	{
-		SimpleAudioEngine::getInstance()->unloadEffect("GunSound.wav"); //메모리에서 효과음 삭제
-		Director::getInstance()->replaceScene(GameOver::createScene()); //게임오버 씬으로 이동
+		this->schedule(schedule_selector(InGame::timer_for_monsterOut), 1.0f);
 	}
 
 	if (this->B_time <= 0)
@@ -164,6 +164,17 @@ void InGame::timer(float f)
 		Director::getInstance()->replaceScene(GameOver::createScene()); //게임오버 씬으로 이동
 	}
 }
+
+
+void InGame::timer_for_monsterOut(float f)
+{
+	//게임 종료
+	SimpleAudioEngine::getInstance()->unloadEffect("GunSound.wav"); //메모리에서 효과음 삭제
+	Director::getInstance()->replaceScene(GameOver::createScene()); //게임오버 씬으로 이동
+
+}
+
+
 
 void InGame::createBullet()
 {
@@ -206,7 +217,7 @@ void InGame::createEnemy()
 	pEnemy = Sprite::createWithSpriteFrameName("s1-removebg-preview.png");
 
 	pEnemy->setPosition(Point(70, 450));
-
+	pEnemy->setScale(0.8f);
 	this->addChild(pEnemy);
 	auto animation = Animation::create();
 	animation->setDelayPerUnit(0.2f);
@@ -266,6 +277,7 @@ void InGame::doBuyWindUnit(std::string tableName)
 		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("ground_Gun1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
+		unitWind[indexUnit]->setFlipX(true);
 		this->addChild(unitWind[indexUnit]);
 
 		auto animation = Animation::create();

@@ -76,6 +76,7 @@ public:
 	cocos2d::Label*timer_label;
 	int time_count;
 	void timer(float f);
+	void timer_for_monsterOut(float f);
 	void tick1(float f);
 
 	// implement the "static create()" method manually
