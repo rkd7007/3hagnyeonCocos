@@ -44,8 +44,8 @@ public:
 	void popUnitAll(Ref* sender); //모든 유닛 보는 팝업창
 
 	//적--------------------------------------------------------
-	cocos2d::Sprite* pEnemy[20]; //적 이미지
-	void createEnemy(float f); //적 만듦 - 참고 : https://rudalstb.tistory.com/74
+	cocos2d::Sprite* pEnemy; //적 이미지
+	void createEnemy(); //적 만듦 - 참고 : https://rudalstb.tistory.com/74
 	int count_enemy; //적이 몇마리 생성됐는지 카운트
 	bool MaxEnemy; //max까지 적이 생성됐는지
 	int Hp = 5;
