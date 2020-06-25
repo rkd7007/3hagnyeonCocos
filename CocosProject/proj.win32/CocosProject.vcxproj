@@ -150,15 +150,21 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\CreatePopUnit.cpp" />
+    <ClCompile Include="..\Classes\CreatePopUnitMix.cpp" />
+    <ClCompile Include="..\Classes\GameOver.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\InGame.cpp" />
+    <ClCompile Include="..\Classes\PopAllUnit.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\CreatePopUnit.h" />
+    <ClInclude Include="..\Classes\CreatePopUnitMix.h" />
+    <ClInclude Include="..\Classes\GameOver.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\InGame.h" />
+    <ClInclude Include="..\Classes\PopAllUnit.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

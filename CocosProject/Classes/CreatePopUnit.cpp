@@ -10,35 +10,43 @@ bool CreatePopUnit::init()
 		return false;
 	}
 
+	auto winSize = Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
+
 	auto Pop = LayerColor::create(Color4B(0, 0, 255, 255));
+	Pop->setScaleX(0.5);
+	Pop->setScaleY(0.5);
+	//Pop->setPosition(Point(winSize.width, winSize.height));
 	this->addChild(Pop);
-
-	auto label = Label::createWithSystemFont("Chose Unit", "Thonburi", 24);
-	label->setPosition(Vec2(this->getContentSize().width / 2, 50));
-	this->addChild(label);
-
+	
+	/*
+	포인트 팁
+	https://cocos2dx.tistory.com/entry/cocos2dx-%EC%A2%8C%ED%91%9C%EA%B3%84-Position%EA%B3%BC-Anchor
+	https://hyunity3d.tistory.com/231
+	*/
+	
 	//바람속성유닛구매 메뉴
-	auto label_Unit_wind = Label::createWithSystemFont("바람 속성", "DAON_2.28(L)", 30);
-	auto Unititem1 = MenuItemLabel::create(label_Unit_wind, CC_CALLBACK_1(CreatePopUnit::ChagneWindBool, this));
+	auto label_Unit_wind = Label::createWithSystemFont("바람 속성", "DAON_2.28(L)", 50);
+	auto Unititem1 = MenuItemLabel::create(label_Unit_wind, CC_CALLBACK_1(CreatePopUnit::CreateUnit, this, 1));
 	Unititem1->setColor(Color3B(0, 0, 0));
 	Unititem1->setAnchorPoint(Vec2(0.5, 0.5));
-	Unititem1->setPosition(Vec2(100, 240));
-
+	//Unititem1->setAnchorPoint(ccp(0.5f, 0.5f));
+	Unititem1->setPosition(Vec2(50, 100));
 
 	//땅속성유닛구매 메뉴
-	auto label_Unit_ground = Label::createWithSystemFont("땅 속성", "DAON_2.28(L)", 30);
-	auto Unititem2 = MenuItemLabel::create(label_Unit_ground, CC_CALLBACK_1(CreatePopUnit::ChagneGroundBool, this));
+	auto label_Unit_ground = Label::createWithSystemFont("땅 속성", "DAON_2.28(L)", 50);
+	auto Unititem2 = MenuItemLabel::create(label_Unit_ground, CC_CALLBACK_1(CreatePopUnit::CreateUnit, this, 2));
 	Unititem2->setColor(Color3B(0, 0, 0));
 	Unititem2->setAnchorPoint(Vec2(0.5, 0.5));
-	Unititem2->setPosition(Vec2(260, 240));
-
+	//Unititem2->setAnchorPoint(ccp(0.5f, 0.5f));
+	Unititem2->setPosition(Vec2(50, 50));
 
 	//불속성유닛구매 메뉴
-	auto label_Unit_fire = Label::createWithSystemFont("불 속성", "DAON_2.28(L)", 30);
-	auto Unititem3 = MenuItemLabel::create(label_Unit_fire, CC_CALLBACK_1(CreatePopUnit::ChagneFireBool, this));
+	auto label_Unit_fire = Label::createWithSystemFont("불 속성", "DAON_2.28(L)", 50);
+	auto Unititem3 = MenuItemLabel::create(label_Unit_fire, CC_CALLBACK_1(CreatePopUnit::CreateUnit, this, 3));
 	Unititem3->setColor(Color3B(0, 0, 0));
 	Unititem3->setAnchorPoint(Vec2(0.5, 0.5));
-	Unititem3->setPosition(Vec2(400, 240));
+	//Unititem3->setAnchorPoint(ccp(0.5f, 0.5f));
+	Unititem3->setPosition(Vec2(50, 0));
 
 	auto menu = Menu::create(Unititem1, Unititem2, Unititem3, NULL);
 	this->addChild(menu);
@@ -59,17 +67,34 @@ void CreatePopUnit::BackInGame(Ref* sneder)
 	this->removeFromParentAndCleanup(true); //레이어 제거
 }
 
-void CreatePopUnit::ChagneWindBool(Ref* sneder)
+void CreatePopUnit::CreateUnit(Ref* sneder, int unitNum)
 {
-	isWind = true;
-}
+	std::string table;
 
-void CreatePopUnit::ChagneFireBool(Ref* sneder)
-{
-	isFire = true;
-}
+	switch (unitNum)
+	{
+	case 1:
+	{
+		table = "wind";
+		wind_1 += 1;
+	}
+	break;
+	case 2:
+	{
+		table = "ground";
+		ground_1 += 1;
+	}
+	break;
+	case 3:
+	{
+		table = "fire";
+		fire_1 += 1;
+	}
+	break;
+	}
 
-void CreatePopUnit::ChagneGroundBool(Ref* sneder)
-{
-	isGround = true;
+	auto parent = (InGame *)this->getParent(); //부모를 가져온다.
+	parent->doBuyWindUnit(table); //부모의 메서드를 호출한다.
+
+	this->removeFromParentAndCleanup(true);
 }

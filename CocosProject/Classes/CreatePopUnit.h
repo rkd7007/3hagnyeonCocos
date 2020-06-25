@@ -15,14 +15,13 @@ class CreatePopUnit : public cocos2d::Layer
 public:
     virtual bool init();
 
-	bool isWind;
-	bool isFire;
-	bool isGround;
-
 	void BackInGame(Ref* sneder);
-	void ChagneWindBool(Ref* sneder); //¹Ù¶÷ ¼Ó¼º ´­·¶À¸¸é
-	void ChagneFireBool(Ref* sneder); //ºÒ ¼Ó¼º ´­·¶À¸¸é
-	void ChagneGroundBool(Ref* sneder); //¶¥ ¼Ó¼º ´­·¶À¸¸é
+	void CreateUnit(Ref* sneder, int unitNum);
+
+	//·¹º§ 1 À¯´Ö °¹¼ö
+	int wind_1;
+	int ground_1;
+	int fire_1;
 
     // implement the "static create()" method manually
     CREATE_FUNC(CreatePopUnit);
