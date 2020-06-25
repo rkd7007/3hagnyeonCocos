@@ -184,7 +184,7 @@ void InGame::createBullet()
 	SimpleAudioEngine::getInstance()->playEffect("GunSound.wav", false); //효과음출력
 
 	pBullet[indexBullet] = Sprite::create("ball.png");
-	pBullet[indexBullet]->setPosition(Vec2(testPointX[testCount] - 50, testPointY[testCount]));
+	pBullet[indexBullet]->setPosition(Vec2(testPointX[testCount] + 50, testPointY[testCount]));
 
 	this->addChild(pBullet[indexBullet]);
 
@@ -196,8 +196,8 @@ void InGame::createBullet()
 	//SmokeParticle->setPosition(Vec2(pBullet[indexBullet]->getPositionX(), pBullet[indexBullet]->getPositionY()));
 	//this->addChild(SmokeParticle);
 
-	auto myActionForward = MoveTo::create(1, Vec2(-10, testPointY[testCount])); //정면으로 날리기
-	auto myAction = Sequence::create(Place::create(Vec2(testPointX[testCount] - 50, testPointY[testCount])), myActionForward, nullptr); //원래 위치로 바꾸기
+	auto myActionForward = MoveTo::create(1, Vec2(950, testPointY[testCount])); //정면으로 날리기
+	auto myAction = Sequence::create(Place::create(Vec2(testPointX[testCount] + 50, testPointY[testCount])), myActionForward, nullptr); //원래 위치로 바꾸기
 	pBullet[indexBullet]->runAction(myAction);
 }
 
@@ -216,8 +216,10 @@ void InGame::createEnemy()
 	cache->addSpriteFramesWithFile("shark.plist");
 	pEnemy = Sprite::createWithSpriteFrameName("s1-removebg-preview.png");
 
-	pEnemy->setPosition(Point(70, 450));
+	pEnemy->setPosition(Point(900, 150));
 	pEnemy->setScale(0.8f);
+	pEnemy->setFlipX(true);
+
 	this->addChild(pEnemy);
 	auto animation = Animation::create();
 	animation->setDelayPerUnit(0.2f);
@@ -232,13 +234,17 @@ void InGame::createEnemy()
 	auto action = RepeatForever::create(animate);
 	pEnemy->runAction(action);
 
-	auto action1 = MoveTo::create(3, Vec2(70, 50));//아래
-	auto action2 = MoveTo::create(5, Vec2(900, 50));//오른쪽
-	auto action3 = MoveTo::create(3, Vec2(900, 450));//위
-	auto action4 = MoveTo::create(5, Vec2(70, 450));//왼쪽
-	auto action5 = Sequence::create(action1, action2, action3, action4, NULL);
-	auto action6 = RepeatForever::create(action5); //계속 반복시킴
-	pEnemy->runAction(action6);
+	//auto action1 = MoveTo::create(3, Vec2(70, 50));//아래
+	//auto action2 = MoveTo::create(5, Vec2(900, 50));//오른쪽
+	//auto action3 = MoveTo::create(3, Vec2(900, 450));//위
+	//auto action4 = MoveTo::create(5, Vec2(70, 450));//왼쪽
+	//auto action5 = Sequence::create(action1, action2, action3, action4, NULL);
+	//auto action6 = RepeatForever::create(action5); //계속 반복시킴
+
+
+	auto action_test = MoveTo::create(4, Vec2(70, 150));//왼쪽
+
+	pEnemy->runAction(action_test);
 
 	count_enemy += 1; //적 수 증가
 	log("적의 수 : %d", count_enemy);
