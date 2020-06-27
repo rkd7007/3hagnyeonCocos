@@ -7,7 +7,7 @@
 
 using namespace cocos2d;
 
-//오디오 소스 관련 네임스페이스 선언
+//오디오 소스 관련 네임스페이스 선언 
 using namespace CocosDenshion;
 
 Scene* InGame::createScene()
@@ -387,7 +387,7 @@ void InGame::tick1(float f)
 
 		bChange = false;
 	}
-	else if (Bullet_x <= -1)
+	else if (Bullet_x >= 900)
 	{
 		pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
 		pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
