@@ -383,37 +383,40 @@ void InGame::tick1(float f)
 		this->createEnemy(); //적 생성
 	}
 
-	Bullet_x = pBullet[indexBullet]->getPosition().x;
-	Bullet_y = pBullet[indexBullet]->getPosition().y;
-
+	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
+	{
+		Bullet_x[indexBullet] = pBullet[indexBullet]->getPosition().x;
+		Bullet_y[indexBullet] = pBullet[indexBullet]->getPosition().y;
+	}
 	Enemy_x = pEnemy->getPosition().x;
 	Enemy_y = pEnemy->getPosition().y;
-
-	//if (pBullet->getBoundingBox().intersectsRect(pEnemy->getBoundingBox()))//충돌하면
-	if((Bullet_x <= Enemy_x +149 && Bullet_x >= Enemy_x - 149) && (Bullet_y <= Enemy_y + 50 && Bullet_y >= Enemy_y - 50))
+	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
-		pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
-		pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
+		//if (pBullet->getBoundingBox().intersectsRect(pEnemy->getBoundingBox()))//충돌하면
+		if ((Bullet_x[indexBullet] <= Enemy_x + 149 && Bullet_x[indexBullet] >= Enemy_x - 149) && (Bullet_y[indexBullet] <= Enemy_y + 50 && Bullet_y[indexBullet] >= Enemy_y - 50))
+		{
+			pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
+			pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
 
-		score = score + 10;
-		score_label->setString(StringUtils::format("Score : %3d", score)); //레이블 수정
+			score = score + 10;
+			score_label->setString(StringUtils::format("Score : %3d", score)); //레이블 수정
 
-		bChange = true;
+			bChange = true;
 
-		/*int killenemy = UserDefault::getInstance()->getIntegerForKey("KILLENEMY") + 1;
-		UserDefault::getInstance()->setIntegerForKey("KILLENEMY", killenemy);
-		UserDefault::getInstance()->flush();
-		killenemy_label->setString(StringUtils::format("KILL : %3d", killenemy));*/
+			/*int killenemy = UserDefault::getInstance()->getIntegerForKey("KILLENEMY") + 1;
+			UserDefault::getInstance()->setIntegerForKey("KILLENEMY", killenemy);
+			UserDefault::getInstance()->flush();
+			killenemy_label->setString(StringUtils::format("KILL : %3d", killenemy));*/
 
-		//auto particle = ParticleGalaxy::create();
-		//particle->setDuration(0.2f); //출력 시간
-		//particle->setSpeed(100); //진행 시간
-		//particle->setGravity(Point(0, 300)); //y축으로 중력을 300정도 지정
-		//particle->setAutoRemoveOnFinish(true); //파티클 지속시간 종료 후 자동제거
-		//particle->setPosition(Vec2(pEnemy->getPositionX(), pEnemy->getPositionY()));
-		//this->addChild(particle);
+			//auto particle = ParticleGalaxy::create();
+			//particle->setDuration(0.2f); //출력 시간
+			//particle->setSpeed(100); //진행 시간
+			//particle->setGravity(Point(0, 300)); //y축으로 중력을 300정도 지정
+			//particle->setAutoRemoveOnFinish(true); //파티클 지속시간 종료 후 자동제거
+			//particle->setPosition(Vec2(pEnemy->getPositionX(), pEnemy->getPositionY()));
+			//this->addChild(particle);
+		}
 	}
-
 	if (bChange)
 	{
 		pEnemy->removeFromParentAndCleanup(true); //적제거
@@ -421,16 +424,19 @@ void InGame::tick1(float f)
 
 		bChange = false;
 	}
-	else if (Bullet_x >= 900)
+	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
-		for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
-		{
-			pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
-			pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
-		}
-		
+	 if (Bullet_x[indexBullet] >= 900)
+	{
+
+		pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
+		pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
+
+
+	}
 	}
 }
+
 
 void InGame::popUnit(Ref* sender)
 {

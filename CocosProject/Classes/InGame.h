@@ -64,8 +64,8 @@ public:
 	int indexBullet;
 	void createBullet(); //ÃÑ¾Ë ¸¸µê
 	int B_time; //ÃÑ¾Ë »ý¼º ½Ã°£
-	int Bullet_x;
-	int Bullet_y;
+	int Bullet_x[20];
+	int Bullet_y[20];
 
 	//Á¡¼ö--------------------------------------------------------
 	cocos2d::Label* score_label; //Á¡¼ö
