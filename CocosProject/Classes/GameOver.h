@@ -1,8 +1,9 @@
-#ifndef __GAME_OVER_SCENE_H__
-#define __GAME_OVER_SCENE_H__
+#ifndef __GameOver_SCENE_H__
+#define __GameOver_SCENE_H__
 
 #include "cocos2d.h"
-
+#include "TouchBtn.h"
+#include "Btn_goMenu.h"
 USING_NS_CC;
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -10,19 +11,15 @@ USING_NS_CC;
 #endif
 
 
-class GameOver : public cocos2d::Scene
+class GameOver : public cocos2d::Layer
 {
 public:
-    static cocos2d::Scene* createScene();
+	virtual bool init();
+	void SceneMove(Ref*sender);
 
-    virtual bool init();
 
-	void createBackground();
-	void GoMenu(Ref* sender);
-	void Exitgame(Ref* sender);
-
-    // implement the "static create()" method manually
-    CREATE_FUNC(GameOver);
+	void GoBack(Ref * sender);
+	CREATE_FUNC(GameOver);
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif // __GameOver_H__

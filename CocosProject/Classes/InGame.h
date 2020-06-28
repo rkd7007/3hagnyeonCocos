@@ -83,6 +83,12 @@ public:
 	void timer_for_monsterOut(float f);
 	void tick1(float f);
 
+	//게임오버팝업--------------------------------------------------
+	void popuplayer(Ref*sender);
+
+
+
+
 	// implement the "static create()" method manually
 	CREATE_FUNC(InGame);
 };

@@ -1,16 +1,14 @@
-#include "GameOver.h"
-#include "SimpleAudioEngine.h"
-#include "InGame.h"
 #include "HelloWorldScene.h"
+#include "SimpleAudioEngine.h"
+#include "GameOver.h"
+#include "InGame.h"
 
 USING_NS_CC;
 
-//오디오 소스 관련 네임스페이스 선언
-using namespace CocosDenshion;
-
-Scene* GameOver::createScene()
+static void problemLoading(const char* filename)
 {
-	return GameOver::create();
+	printf("Error while loading: %s\n", filename);
+	printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 
 // on "init" you need to initialize your instance
@@ -18,67 +16,61 @@ bool GameOver::init()
 {
 	//////////////////////////////
 	// 1. super init first
-	if (!Scene::init())
+	if (!Layer::init())
 	{
 		return false;
 	}
 
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	//auto parent = (InGame *)this->getParent();
+	//parent->time_count;
+	//parent->timer_label;
 
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("MainSound.mp3", true); //반복해서 출력
-	createBackground();
 
-	//메뉴로 돌아가기
-	auto goMenuLabel = Label::createWithSystemFont("메뉴", "DAON_2.28(L)", 20);
-	auto Unititem1 = MenuItemLabel::create(goMenuLabel, CC_CALLBACK_1(GameOver::GoMenu, this));
-	Unititem1->setColor(Color3B(0, 0, 0));
-	Unititem1->setAnchorPoint(Vec2(0, 0));
-	Unititem1->setPosition(Vec2(this->getContentSize().width - 700, 200));
+	auto back_main = Sprite::create("GAMEOVER_POP.png");
+	back_main->setAnchorPoint(Vec2(0, 0));
+	back_main->setPosition(200, -40);
+	back_main->setScale(0.25f);
+	this->addChild(back_main);
+	
+	auto exit = TouchBtn::create("xButton.png");
+	exit->setAnchorPoint(Vec2(0, 0));
+	exit->setPosition(690, 470);
+	exit->setScale(0.25f);
+	exit->setPriorityWithThis(true);
+	this->addChild(exit);
 
-	//게임 나가기
-	auto exitGame = Label::createWithSystemFont("나가기", "DAON_2.28(L)", 20);
-	auto Unititem2 = MenuItemLabel::create(exitGame, CC_CALLBACK_1(GameOver::Exitgame, this));
-	Unititem2->setColor(Color3B(0, 0, 0));
-	Unititem2->setAnchorPoint(Vec2(0, 0));
-	Unititem2->setPosition(Vec2(this->getContentSize().width - 500, 200));
+	auto go_menu = Btn_goMenu::create("stageUI1.png");
+	go_menu->setAnchorPoint(Vec2(0, 0));
+	go_menu->setPosition(380, 50);
+	go_menu->setScale(0.13f);
+	go_menu->setScaleX(0.4);
+	go_menu->setPriorityWithThis(true);
+	this->addChild(go_menu);
 
-	auto menu = Menu::create(Unititem1, Unititem2, NULL);
-	this->addChild(menu);
+	//timer_label->setPosition(380, 100);
+	//timer_label->setString(StringUtils::format("Time : %3d", parent->time_count));
+
 
 	return true;
 }
 
-void GameOver::createBackground()
+
+
+void GameOver::GoBack(Ref*sender)
 {
-	auto voidNode = Layer::create();
-	auto back1 = Sprite::create("MenuBack.png");
-	back1->setAnchorPoint(Vec2(0, 0));
-	back1->setPosition(Vec2(-20, 0));
-	back1->setScaleX(1.08f);
-	back1->setScaleY(1.053f);
-
-	auto back_Title = Sprite::create("back_Title.png");
-	back_Title->setAnchorPoint(Vec2(0, 0));
-	back_Title->setPosition(Vec2(120, 300));
-	back_Title->setScale(2.0);
-
-	//배경노드에 스프라이트를 넣는다
-	voidNode->addChild(back1);
-
-	//배경노드에 스프라이트를 넣는다
-	voidNode->addChild(back_Title);
-
-	//캐릭터보다 아래에 위치하도록 ZOrder 추가
-	this->addChild(voidNode, 0);	
+	this->removeFromParentAndCleanup(true);
 }
 
-void GameOver::GoMenu(Ref* sender)
-{
-	Director::getInstance()->replaceScene(HelloWorld::createScene());
-}
-
-void GameOver::Exitgame(Ref* sender)
-{
-	exit(0);
+void GameOver::SceneMove(Ref*sender)
+{	
+//유닛 모음 창 생성
+//	auto go_menu = Label::createWithSystemFont("유닛", "DAON_2.28(L)", 20);
+//	auto go_menuitem = MenuItemLabel::create(go_menu, CC_CALLBACK_1(GameOver::SceneMove(), this));
+//	go_menuitem->setColor(Color3B(0, 0, 0));
+//	go_menuitem->setAnchorPoint(ccp(0, 0)); //중심점이 좌측 하단
+//	go_menuitem->setPosition(Point(380, 50));
+//
+//	auto menu = Menu::create(go_menu, NULL);
+//	this->addChild(menu);
+//	Director::getInstance()->replaceScene(StageScene::createScene());
 }

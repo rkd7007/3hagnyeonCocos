@@ -68,7 +68,7 @@ bool InGame::init()
 void InGame::BaseFunc()
 {
 	//변수 초기화
-	time_count = 60; //시간
+	time_count = 3; //시간
 	E_time = 50;
 	B_time = 50;
 	c_Xpoint = 300;
@@ -167,7 +167,7 @@ void InGame::timer(float f)
 	{
 		//게임 종료
 		SimpleAudioEngine::getInstance()->unloadEffect("GunSound.wav"); //메모리에서 효과음 삭제
-		Director::getInstance()->replaceScene(GameOver::createScene()); //게임오버 씬으로 이동
+		popuplayer(this);
 	}
 }
 
@@ -176,7 +176,7 @@ void InGame::timer_for_monsterOut(float f)
 {
 	//게임 종료
 	SimpleAudioEngine::getInstance()->unloadEffect("GunSound.wav"); //메모리에서 효과음 삭제
-	Director::getInstance()->replaceScene(GameOver::createScene()); //게임오버 씬으로 이동
+	popuplayer(this);
 
 }
 
@@ -546,4 +546,13 @@ void InGame::createUnit()
 			doBuyWindUnit(table);
 		}
 	}
+}
+
+
+void InGame::popuplayer(Ref*sender)
+{
+	auto layer = GameOver::create();
+	layer->setScaleX(0.8);
+	layer->setScaleY(0.8);
+	this->addChild(layer);
 }
