@@ -213,7 +213,6 @@ void InGame::createBullet()
 		auto myActionForward = MoveTo::create(1, Vec2(950, testPointY[indexBullet])); //정면으로 날리기
 		auto myAction = Sequence::create(Place::create(Vec2(testPointX[indexBullet] + 50, testPointY[indexBullet])), myActionForward, nullptr); //원래 위치로 바꾸기
 		pBullet[indexBullet]->runAction(myAction);
-
 	}
 }
 
@@ -306,14 +305,10 @@ void InGame::doBuyWindUnit(std::string tableName)
 
 				if (testCount >= 12 && testCount != 0)
 					testPointX[testCount] += 80;
-			}
-
-
-			
+			}			
 		}
 
-		start_count = true;
-
+		start_count = true; 
 
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
 		cache->addSpriteFramesWithFile("ground_Gun.plist"); // 프레임캐시에 plist 정보 추가
@@ -376,11 +371,13 @@ void InGame::c_MoveToTouch()
 
 void InGame::tick1(float f)
 {
-	if (pBullet[indexBullet] == nullptr)
+	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
-		this->createBullet(); //총알 생성		
+		if (pBullet[indexBullet] == nullptr)
+		{
+			this->createBullet(); //총알 생성		
+		}
 	}
-
 	if (pEnemy == nullptr)
 	{
 		this->createEnemy(); //적 생성
@@ -426,8 +423,12 @@ void InGame::tick1(float f)
 	}
 	else if (Bullet_x >= 900)
 	{
-		pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
-		pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
+		for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
+		{
+			pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
+			pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
+		}
+		
 	}
 }
 
