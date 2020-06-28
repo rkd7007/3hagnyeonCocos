@@ -32,11 +32,11 @@ bool InGame::init()
 	this->scheduleUpdate();
 	
 	//유닛 속성 뽑는 팝업 창 생성
-	auto label_chose_unit = Label::createWithSystemFont("유닛 구매", "DAON_2.28(L)", 20);
+	auto label_chose_unit = Label::createWithTTF("유닛 구매", "fonts/Maplestory Light.ttf", 20);
 	auto Unititem = MenuItemLabel::create(label_chose_unit, CC_CALLBACK_1(InGame::popUnit, this));
 	Unititem->setColor(Color3B(0, 0, 0));
 	Unititem->setAnchorPoint(ccp(1, 1)); //중심점이 우측 상단
-	Unititem->setPosition(Point(winSize.width - 500, winSize.height - 300));
+	Unititem->setPosition(Point(winSize.width - 600, winSize.height - 770));
 
 	//유닛 속성 조합하는 팝업 창 생성
 	auto label_Mix_unit = Label::createWithSystemFont("유닛 조합", "DAON_2.28(L)", 20);
@@ -78,25 +78,31 @@ void InGame::BaseFunc()
 	testPointY[0] = 380;
 
 	//배경
-	auto back_main = Sprite::create("back_main.png");
+	auto back_main = Sprite::create("gameMap.png");
 	back_main->setAnchorPoint(Vec2(0, 0));
 	back_main->setPosition(0, 0);
 	this->addChild(back_main);
 
 	//타이머
-	timer_label = Label::createWithSystemFont("Time : ", "DAON_2.28(L)", 30);
-	timer_label->setPosition(90, 510);
+	timer_label = Label::createWithTTF("Time : ", "fonts/Maplestory Light.ttf", 20);
+	timer_label->setPosition(250, 510);
 	timer_label->setColor(Color3B::BLACK);
 	this->addChild(timer_label);
 
 	//레이블 수정
 	timer_label->setString(StringUtils::format("Time : %3d", time_count));
 
-	//점수
-	score_label = Label::createWithSystemFont("Score : ", "DAON_2.28(L)", 30);
-	score_label->setPosition(Vec2(270, 510));
+	//코인
+	score_label = Label::createWithTTF("Coin : ", "fonts/Maplestory Light.ttf", 20);
+	score_label->setPosition(Vec2(500, 510));
 	score_label->setColor(Color3B::BLACK);
 	this->addChild(score_label);
+
+	//체력
+	Hp_label = Label::createWithTTF("Hp : ", "fonts/Maplestory Light.ttf", 20);
+	Hp_label->setPosition(Vec2(730, 510));
+	Hp_label->setColor(Color3B::BLACK);
+	this->addChild(Hp_label);
 
 	//죽인 적의 수
 	//killenemy_label = Label::createWithSystemFont("kill : ", "DAON_2.28(L)", 30);
@@ -311,8 +317,8 @@ void InGame::doBuyWindUnit(std::string tableName)
 		start_count = true; 
 
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
-		cache->addSpriteFramesWithFile("ground_Gun.plist"); // 프레임캐시에 plist 정보 추가
-		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("ground_Gun1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
+		cache->addSpriteFramesWithFile("sprite_Tiger.plist"); // 프레임캐시에 plist 정보 추가
+		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("sprite_Tiger1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
@@ -321,9 +327,9 @@ void InGame::doBuyWindUnit(std::string tableName)
 		auto animation = Animation::create();
 		animation->setDelayPerUnit(0.3f);
 
-		for (int i = 1; i < 6; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
+		for (int i = 1; i < 23; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
 		{
-			auto frame = cache->getSpriteFrameByName(StringUtils::format("ground_Gun%d.png", i));
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("sprite_Tiger%d.png", i));
 			animation->addSpriteFrame(frame);
 		}
 

@@ -1,6 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-#include "InGame.h"
+#include "StageScene.h"
 
 USING_NS_CC;
 
@@ -81,7 +81,7 @@ bool HelloWorld::onTouchBegan(Touch*touch, Event *event)
 {
 
 	//터치 시 화면전환
-	Director::getInstance()->replaceScene(InGame::createScene());
+	Director::getInstance()->replaceScene(StageScene::createScene());
 
 
 	return true;

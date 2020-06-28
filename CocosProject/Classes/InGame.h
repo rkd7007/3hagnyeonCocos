@@ -59,6 +59,10 @@ public:
 	void createUnit(); //초기 세마리 유닛 만듦
 	void doBuyWindUnit(std::string tableName);
 	bool start_count;
+
+	//체력--------------------------------------------------------
+	cocos2d::Label* Hp_label; //체력
+
 	//총알--------------------------------------------------------
 	cocos2d::Sprite* pBullet[30]; //총알 이미지
 	int indexBullet;

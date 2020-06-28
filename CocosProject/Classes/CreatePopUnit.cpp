@@ -1,5 +1,6 @@
 #include "CreatePopUnit.h"
 #include "InGame.h"
+#include "cocos-ext.h"
 
 USING_NS_CC;
 
@@ -12,18 +13,22 @@ bool CreatePopUnit::init()
 
 	auto winSize = Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 
-	auto Pop = LayerColor::create(Color4B(0, 0, 255, 255));
-	Pop->setScaleX(0.5);
-	Pop->setScaleY(0.5);
-	//Pop->setPosition(Point(winSize.width, winSize.height));
+	auto Pop = Sprite::create("buyUnit.png");
+	Pop->setAnchorPoint(Vec2(0, 0));
+	Pop->setScaleX(0.15);
+	Pop->setScaleY(0.15);
+	Pop->setPosition(Vec2(200, 40));
 	this->addChild(Pop);
-	
+
 	/*
 	포인트 팁
 	https://cocos2dx.tistory.com/entry/cocos2dx-%EC%A2%8C%ED%91%9C%EA%B3%84-Position%EA%B3%BC-Anchor
 	https://hyunity3d.tistory.com/231
 	*/
 	
+
+
+	/*
 	//바람속성유닛구매 메뉴
 	auto label_Unit_wind = Label::createWithSystemFont("바람 속성", "DAON_2.28(L)", 50);
 	auto Unititem1 = MenuItemLabel::create(label_Unit_wind, CC_CALLBACK_1(CreatePopUnit::CreateUnit, this, 1));
@@ -58,9 +63,22 @@ bool CreatePopUnit::init()
 	go_ingamMenu->alignItemsVertically();
 	go_ingamMenu->setPosition(Vec2(this->getContentSize().width / 2, 30));
 	this->addChild(go_ingamMenu);
+	*/
 
 	return true;
 }
+
+//void createButtonAndListener()
+//{
+//	auto click_back = ui::Button::create("xButton.png");
+//	click_back->addClickEventListener(CC_CALLBACK_1(onBtnClickButton, this));
+//	this->addChild(click_back);
+//}
+//
+//void onBtnClickButton(Ref* sender)
+//{
+//	this->removeFromParentAndCleanup(true); //레이어 제거
+//}
 
 void CreatePopUnit::BackInGame(Ref* sneder)
 {
