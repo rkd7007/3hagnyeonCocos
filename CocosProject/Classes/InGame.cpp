@@ -178,27 +178,43 @@ void InGame::timer_for_monsterOut(float f)
 
 void InGame::createBullet()
 {
-	indexBullet += 1;
+	//indexBullet += 1;
+
+	//SimpleAudioEngine::getInstance()->preloadEffect("GunSound.wav"); //메모리에 효과음 저장
+	//SimpleAudioEngine::getInstance()->playEffect("GunSound.wav", false); //효과음출력
+
+	//pBullet[indexBullet] = Sprite::create("ball.png");
+	//pBullet[indexBullet]->setPosition(Vec2(testPointX[testCount] + 50, testPointY[testCount]));
+
+	//this->addChild(pBullet[indexBullet]);
+
+	////auto SmokeParticle = ParticleSmoke::create();
+	////SmokeParticle->setDuration(0.1f); //출력 시간
+	////SmokeParticle->setSpeed(100); //진행 시간
+	////SmokeParticle->setGravity(Point(0, 300)); //y축으로 중력을 300정도 지정
+	////SmokeParticle->setAutoRemoveOnFinish(true); //파티클 지속시간 종료 후 자동제거
+	////SmokeParticle->setPosition(Vec2(pBullet[indexBullet]->getPositionX(), pBullet[indexBullet]->getPositionY()));
+	////this->addChild(SmokeParticle);
+
+	//auto myActionForward = MoveTo::create(1, Vec2(950, testPointY[testCount])); //정면으로 날리기
+	//auto myAction = Sequence::create(Place::create(Vec2(testPointX[testCount] + 50, testPointY[testCount])), myActionForward, nullptr); //원래 위치로 바꾸기
+	//pBullet[indexBullet]->runAction(myAction);
 
 	SimpleAudioEngine::getInstance()->preloadEffect("GunSound.wav"); //메모리에 효과음 저장
 	SimpleAudioEngine::getInstance()->playEffect("GunSound.wav", false); //효과음출력
 
-	pBullet[indexBullet] = Sprite::create("ball.png");
-	pBullet[indexBullet]->setPosition(Vec2(testPointX[testCount] + 50, testPointY[testCount]));
+	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
+	{
+		pBullet[indexBullet] = Sprite::create("ball.png");
+		pBullet[indexBullet]->setPosition(Vec2(testPointX[indexBullet] + 50, testPointY[indexBullet]));
 
-	this->addChild(pBullet[indexBullet]);
+		this->addChild(pBullet[indexBullet]);
 
-	//auto SmokeParticle = ParticleSmoke::create();
-	//SmokeParticle->setDuration(0.1f); //출력 시간
-	//SmokeParticle->setSpeed(100); //진행 시간
-	//SmokeParticle->setGravity(Point(0, 300)); //y축으로 중력을 300정도 지정
-	//SmokeParticle->setAutoRemoveOnFinish(true); //파티클 지속시간 종료 후 자동제거
-	//SmokeParticle->setPosition(Vec2(pBullet[indexBullet]->getPositionX(), pBullet[indexBullet]->getPositionY()));
-	//this->addChild(SmokeParticle);
+		auto myActionForward = MoveTo::create(1, Vec2(950, testPointY[indexBullet])); //정면으로 날리기
+		auto myAction = Sequence::create(Place::create(Vec2(testPointX[indexBullet] + 50, testPointY[indexBullet])), myActionForward, nullptr); //원래 위치로 바꾸기
+		pBullet[indexBullet]->runAction(myAction);
 
-	auto myActionForward = MoveTo::create(1, Vec2(950, testPointY[testCount])); //정면으로 날리기
-	auto myAction = Sequence::create(Place::create(Vec2(testPointX[testCount] + 50, testPointY[testCount])), myActionForward, nullptr); //원래 위치로 바꾸기
-	pBullet[indexBullet]->runAction(myAction);
+	}
 }
 
 bool InGame::onTouchBegan(Touch* touch, Event* event)
@@ -260,23 +276,44 @@ void InGame::doBuyWindUnit(std::string tableName)
 	{
 		log("wind 호출");
 	}
-	if (tableName == "ground")
+	if (tableName == "ground" && testCount < 16)
 	{
 		log("ground 호출");
 		log("x위치 : %d, y위치 : %d", testPointX[testCount], testPointY[testCount]);
 
 		indexUnit += 1;
-		testCount += 1;
+
+		if(start_count)
+			testCount += 1;
 
 		//순서대로 위치하여 생성되도록 함
-		testPointY[testCount] = testPointY[testCount - 1] - 80;
-		testPointX[testCount] = 100;
+		testPointY[testCount] = testPointY[testCount - 1] - 80; //80만큼씩 아래로 떨어져서 생성
+		testPointX[testCount] = 100; //캐릭터x값 
 
 		if (testPointY[testCount] <= 100)
 		{
 			testPointY[testCount] = 380;
-			testPointX[testCount] += 80;
+			/*testPointX[testCount] += 80;*/
 		}
+
+		if (testCount >= 4 && testCount != 0)
+		{
+			testPointX[testCount] += 80;
+
+			if (testCount >= 8 && testCount != 0)
+			{
+				testPointX[testCount] += 80;
+
+				if (testCount >= 12 && testCount != 0)
+					testPointX[testCount] += 80;
+			}
+
+
+			
+		}
+
+		start_count = true;
+
 
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
 		cache->addSpriteFramesWithFile("ground_Gun.plist"); // 프레임캐시에 plist 정보 추가

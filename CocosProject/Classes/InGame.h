@@ -58,7 +58,7 @@ public:
 	int indexUnit;
 	void createUnit(); //ÃÊ±â ¼¼¸¶¸® À¯´Ö ¸¸µê
 	void doBuyWindUnit(std::string tableName);
-
+	bool start_count;
 	//ÃÑ¾Ë--------------------------------------------------------
 	cocos2d::Sprite* pBullet[30]; //ÃÑ¾Ë ÀÌ¹ÌÁö
 	int indexBullet;
