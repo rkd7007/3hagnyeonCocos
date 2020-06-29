@@ -173,7 +173,7 @@ public:
         KEY_LEFT_BRACKET,
         KEY_BACK_SLASH,
         KEY_RIGHT_BRACKET,
-        KEY_UNDERSCORE,
+        KEY_UNDERmyCoin,
         KEY_GRAVE,
         KEY_A,
         KEY_B,

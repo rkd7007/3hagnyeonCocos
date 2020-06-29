@@ -38,7 +38,7 @@ It also successfully passes all tests from the SMHasher suite.
 
 Comparison (single thread, Windows Seven 32 bits, using SMHasher on a Core 2 Duo @3GHz)
 
-Name            Speed       Q.Score   Author
+Name            Speed       Q.myCoin   Author
 xxHash          5.4 GB/s     10
 CrapWow         3.2 GB/s      2       Andrew
 MumurHash 3a    2.7 GB/s     10       Austin Appleby
@@ -52,9 +52,9 @@ CRC32           0.43 GB/s     9
 MD5-32          0.33 GB/s    10       Ronald L. Rivest
 SHA1-32         0.28 GB/s    10
 
-Q.Score is a measure of quality of the hash function. 
+Q.myCoin is a measure of quality of the hash function. 
 It depends on successfully passing SMHasher test set. 
-10 is a perfect score.
+10 is a perfect myCoin.
 */
 
 #pragma once

@@ -233,12 +233,12 @@ void etc1_decode_block(const etc1_byte* pIn, etc1_byte* pOut) {
 typedef struct {
     etc1_uint32 high;
     etc1_uint32 low;
-    etc1_uint32 score; // Lower is more accurate
+    etc1_uint32 myCoin; // Lower is more accurate
 } etc_compressed;
 
 static
 inline void take_best(etc_compressed* a, const etc_compressed* b) {
-    if (a->score > b->score) {
+    if (a->myCoin > b->myCoin) {
         *a = *b;
     }
 }
@@ -298,7 +298,7 @@ inline int square(int x) {
 static etc1_uint32 chooseModifier(const etc1_byte* pBaseColors,
         const etc1_byte* pIn, etc1_uint32 *pLow, int bitIndex,
         const int* pModifierTable) {
-    etc1_uint32 bestScore = ~0;
+    etc1_uint32 bestmyCoin = ~0;
     int bestIndex = 0;
     int pixelR = pIn[0];
     int pixelG = pIn[1];
@@ -309,33 +309,33 @@ static etc1_uint32 chooseModifier(const etc1_byte* pBaseColors,
     for (int i = 0; i < 4; i++) {
         int modifier = pModifierTable[i];
         int decodedG = clamp(g + modifier);
-        etc1_uint32 score = (etc1_uint32) (6 * square(decodedG - pixelG));
-        if (score >= bestScore) {
+        etc1_uint32 myCoin = (etc1_uint32) (6 * square(decodedG - pixelG));
+        if (myCoin >= bestmyCoin) {
             continue;
         }
         int decodedR = clamp(r + modifier);
-        score += (etc1_uint32) (3 * square(decodedR - pixelR));
-        if (score >= bestScore) {
+        myCoin += (etc1_uint32) (3 * square(decodedR - pixelR));
+        if (myCoin >= bestmyCoin) {
             continue;
         }
         int decodedB = clamp(b + modifier);
-        score += (etc1_uint32) square(decodedB - pixelB);
-        if (score < bestScore) {
-            bestScore = score;
+        myCoin += (etc1_uint32) square(decodedB - pixelB);
+        if (myCoin < bestmyCoin) {
+            bestmyCoin = myCoin;
             bestIndex = i;
         }
     }
     etc1_uint32 lowMask = (((bestIndex >> 1) << 16) | (bestIndex & 1))
             << bitIndex;
     *pLow |= lowMask;
-    return bestScore;
+    return bestmyCoin;
 }
 
 static
 void etc_encode_subblock_helper(const etc1_byte* pIn, etc1_uint32 inMask,
         etc_compressed* pCompressed, bool flipped, bool second,
         const etc1_byte* pBaseColors, const int* pModifierTable) {
-    int score = pCompressed->score;
+    int myCoin = pCompressed->myCoin;
     if (flipped) {
         int by = 0;
         if (second) {
@@ -346,7 +346,7 @@ void etc_encode_subblock_helper(const etc1_byte* pIn, etc1_uint32 inMask,
             for (int x = 0; x < 4; x++) {
                 int i = x + 4 * yy;
                 if (inMask & (1 << i)) {
-                    score += chooseModifier(pBaseColors, pIn + i * 3,
+                    myCoin += chooseModifier(pBaseColors, pIn + i * 3,
                             &pCompressed->low, yy + x * 4, pModifierTable);
                 }
             }
@@ -361,13 +361,13 @@ void etc_encode_subblock_helper(const etc1_byte* pIn, etc1_uint32 inMask,
                 int xx = bx + x;
                 int i = xx + 4 * y;
                 if (inMask & (1 << i)) {
-                    score += chooseModifier(pBaseColors, pIn + i * 3,
+                    myCoin += chooseModifier(pBaseColors, pIn + i * 3,
                             &pCompressed->low, y + xx * 4, pModifierTable);
                 }
             }
         }
     }
-    pCompressed->score = score;
+    pCompressed->myCoin = myCoin;
 }
 
 static bool inRange4bitSigned(int color) {
@@ -432,7 +432,7 @@ static void etc_encodeBaseColors(etc1_byte* pBaseColors,
 static
 void etc_encode_block_helper(const etc1_byte* pIn, etc1_uint32 inMask,
         const etc1_byte* pColors, etc_compressed* pCompressed, bool flipped) {
-    pCompressed->score = ~0;
+    pCompressed->myCoin = ~0;
     pCompressed->high = (flipped ? 1 : 0);
     pCompressed->low = 0;
 
@@ -445,7 +445,7 @@ void etc_encode_block_helper(const etc1_byte* pIn, etc1_uint32 inMask,
     const int* pModifierTable = kModifierTable;
     for (int i = 0; i < 8; i++, pModifierTable += 4) {
         etc_compressed temp;
-        temp.score = 0;
+        temp.myCoin = 0;
         temp.high = originalHigh | (i << 5);
         temp.low = 0;
         etc_encode_subblock_helper(pIn, inMask, &temp, flipped, false,
@@ -456,7 +456,7 @@ void etc_encode_block_helper(const etc1_byte* pIn, etc1_uint32 inMask,
     etc_compressed firstHalf = *pCompressed;
     for (int i = 0; i < 8; i++, pModifierTable += 4) {
         etc_compressed temp;
-        temp.score = firstHalf.score;
+        temp.myCoin = firstHalf.myCoin;
         temp.high = firstHalf.high | (i << 2);
         temp.low = firstHalf.low;
         etc_encode_subblock_helper(pIn, inMask, &temp, flipped, true,

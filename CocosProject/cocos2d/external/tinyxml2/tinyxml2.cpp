@@ -502,7 +502,7 @@ char* XMLDocument::Identify( char* p, XMLNode** node )
     }
 
     // What is this thing?
-    // - Elements start with a letter or underscore, but xml is reserved.
+    // - Elements start with a letter or undermyCoin, but xml is reserved.
     // - Comments: <!--
     // - Decleration: <?
     // - Everthing else is unknown to tinyxml.

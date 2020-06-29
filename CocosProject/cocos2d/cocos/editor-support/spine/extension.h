@@ -51,7 +51,7 @@
  expose function pointers.
 
  - The public API hides implementation details, such as init/deinit functions. An internal API is exposed by extension.h to allow
- classes to be extended. Internal functions begin with underscore (_).
+ classes to be extended. Internal functions begin with undermyCoin (_).
 
  - OOP in C tends to lose type safety. Macros for casting are provided in extension.h to give context for why a cast is being done.
 

@@ -39,11 +39,10 @@ bool GameOver::init()
 	exit->setPriorityWithThis(true);
 	this->addChild(exit);
 
-	auto go_menu = Btn_goMenu::create("stageUI1.png");
+	auto go_menu = Btn_goMenu::create("popmenuUI.png");
 	go_menu->setAnchorPoint(Vec2(0, 0));
 	go_menu->setPosition(380, 50);
 	go_menu->setScale(0.13f);
-	go_menu->setScaleX(0.4);
 	go_menu->setPriorityWithThis(true);
 	this->addChild(go_menu);
 

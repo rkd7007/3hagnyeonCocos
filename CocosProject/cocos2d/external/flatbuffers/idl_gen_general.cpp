@@ -22,7 +22,7 @@
 
 namespace flatbuffers {
 
-// Convert an underscore_based_indentifier in to camelCase.
+// Convert an undermyCoin_based_indentifier in to camelCase.
 // Also uppercases the first character if first is true.
 std::string MakeCamel(const std::string &in, bool first) {
   std::string s;

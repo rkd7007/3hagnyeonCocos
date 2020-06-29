@@ -80,9 +80,10 @@ void HelloWorld::createBackground()
 bool HelloWorld::onTouchBegan(Touch*touch, Event *event)
 {
 
-	//터치 시 화면전환
-	Director::getInstance()->replaceScene(StageScene::createScene());
-
+	//터치 시 애니메이션 효과 주면서 화면전환
+	//Director::getInstance()->replaceScene(StageScene::createScene());
+	auto Scene = TransitionCrossFade::create(0.5f, StageScene::createScene());
+	Director::getInstance()->pushScene(Scene);
 
 	return true;
 }

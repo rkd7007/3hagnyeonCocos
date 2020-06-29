@@ -151,11 +151,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Btn_goMenu.cpp" />
     <ClCompile Include="..\Classes\CreatePopUnit.cpp" />
-    <ClCompile Include="..\Classes\CreatePopUnitMix.cpp" />
     <ClCompile Include="..\Classes\GameOver.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\InGame.cpp" />
-    <ClCompile Include="..\Classes\PopAllUnit.cpp" />
     <ClCompile Include="..\Classes\StageScene.cpp" />
     <ClCompile Include="..\Classes\TouchBtn.cpp" />
     <ClCompile Include="main.cpp" />
@@ -164,11 +162,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Btn_goMenu.h" />
     <ClInclude Include="..\Classes\CreatePopUnit.h" />
-    <ClInclude Include="..\Classes\CreatePopUnitMix.h" />
     <ClInclude Include="..\Classes\GameOver.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\InGame.h" />
-    <ClInclude Include="..\Classes\PopAllUnit.h" />
     <ClInclude Include="..\Classes\StageScene.h" />
     <ClInclude Include="..\Classes\TouchBtn.h" />
     <ClInclude Include="main.h" />

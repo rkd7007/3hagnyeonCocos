@@ -39,9 +39,8 @@ public:
 	int isTouchpointY; //터치 y좌표
 
 	//팝업창--------------------------------------------------------
-	void popUnit(Ref* sender); //유닛 구매하는 팝업창
-	void popUnitMix(Ref* sender); //유닛 조합하는 팝업창
-	void popUnitAll(Ref* sender); //모든 유닛 보는 팝업창
+	void popUnit(Ref* sender); //유닛 구매하는 팝업 창
+	void popuplayer(Ref*sender); //게임 오버 팝업 창
 
 	//적--------------------------------------------------------
 	cocos2d::Sprite* pEnemy; //적 이미지
@@ -62,6 +61,7 @@ public:
 
 	//체력--------------------------------------------------------
 	cocos2d::Label* Hp_label; //체력
+	int hp_count;
 
 	//총알--------------------------------------------------------
 	cocos2d::Sprite* pBullet[30]; //총알 이미지
@@ -71,10 +71,9 @@ public:
 	int Bullet_x[20];
 	int Bullet_y[20];
 
-	//점수--------------------------------------------------------
-	cocos2d::Label* score_label; //점수
-	int score;
-	//cocos2d::Label* killenemy_label; //죽인 적의 수
+	//코인--------------------------------------------------------
+	cocos2d::Label* coin_label; //점수
+	int myCoin;
 
 	//시간--------------------------------------------------------
 	cocos2d::Label*timer_label;
@@ -82,12 +81,6 @@ public:
 	void timer(float f);
 	void timer_for_monsterOut(float f);
 	void tick1(float f);
-
-	//게임오버팝업--------------------------------------------------
-	void popuplayer(Ref*sender);
-
-
-
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(InGame);

@@ -27,13 +27,7 @@
     <ClCompile Include="..\Classes\CreatePopUnit.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CreatePopUnitMix.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameOver.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\PopAllUnit.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\StageScene.cpp">
@@ -62,13 +56,7 @@
     <ClInclude Include="..\Classes\CreatePopUnit.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CreatePopUnitMix.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GameOver.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PopAllUnit.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StageScene.h">
