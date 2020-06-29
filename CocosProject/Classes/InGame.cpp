@@ -439,14 +439,14 @@ void InGame::doBuyWindUnit(std::string tableName)
 
 		if (testCount >= 4 && testCount != 0)
 		{
-			testPointX[testCount] += 80;
+			testPointX[testCount] += 110;
 
 			if (testCount >= 8 && testCount != 0)
 			{
-				testPointX[testCount] += 80;
+				testPointX[testCount] += 110;
 
 				if (testCount >= 12 && testCount != 0)
-					testPointX[testCount] += 80;
+					testPointX[testCount] += 110;
 			}
 		}
 
@@ -492,14 +492,14 @@ void InGame::doBuyWindUnit(std::string tableName)
 
 		if (testCount >= 4 && testCount != 0)
 		{
-			testPointX[testCount] += 80;
+			testPointX[testCount] += 110;
 
 			if (testCount >= 8 && testCount != 0)
 			{
-				testPointX[testCount] += 80;
+				testPointX[testCount] += 110;
 
 				if (testCount >= 12 && testCount != 0)
-					testPointX[testCount] += 80;
+					testPointX[testCount] += 110;
 			}			
 		}
 
@@ -545,14 +545,14 @@ void InGame::doBuyWindUnit(std::string tableName)
 
 		if (testCount >= 4 && testCount != 0)
 		{
-			testPointX[testCount] += 80;
+			testPointX[testCount] += 110;
 
 			if (testCount >= 8 && testCount != 0)
 			{
-				testPointX[testCount] += 80;
+				testPointX[testCount] += 110;
 
 				if (testCount >= 12 && testCount != 0)
-					testPointX[testCount] += 80;
+					testPointX[testCount] += 110;
 			}
 		}
 
@@ -598,14 +598,14 @@ void InGame::doBuyWindUnit(std::string tableName)
 
 		if (testCount >= 4 && testCount != 0)
 		{
-			testPointX[testCount] += 80;
+			testPointX[testCount] += 110;
 
 			if (testCount >= 8 && testCount != 0)
 			{
-				testPointX[testCount] += 80;
+				testPointX[testCount] += 110;
 
 				if (testCount >= 12 && testCount != 0)
-					testPointX[testCount] += 80;
+					testPointX[testCount] += 110;
 			}
 		}
 
@@ -651,14 +651,14 @@ void InGame::doBuyWindUnit(std::string tableName)
 
 		if (testCount >= 4 && testCount != 0)
 		{
-			testPointX[testCount] += 80;
+			testPointX[testCount] += 110;
 
 			if (testCount >= 8 && testCount != 0)
 			{
-				testPointX[testCount] += 80;
+				testPointX[testCount] += 110;
 
 				if (testCount >= 12 && testCount != 0)
-					testPointX[testCount] += 80;
+					testPointX[testCount] += 110;
 			}
 		}
 
