@@ -1,8 +1,12 @@
 #include "CreatePopUnit.h"
 #include "InGame.h"
 #include "cocos-ext.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
+
+//오디오 소스 관련 네임스페이스 선언
+using namespace CocosDenshion;
 
 bool CreatePopUnit::init()
 {
@@ -106,6 +110,9 @@ bool CreatePopUnit::init()
 
 void CreatePopUnit::CreateUnit(Ref* sneder, int unitNum)
 {
+	SimpleAudioEngine::getInstance()->preloadEffect("Cash Register.wav"); //메모리에 효과음 저장
+	SimpleAudioEngine::getInstance()->playEffect("Cash Register.wav", false); //효과음출력
+
 	std::string table;
 
 	switch (unitNum)
@@ -130,6 +137,64 @@ void CreatePopUnit::CreateUnit(Ref* sneder, int unitNum)
 	break;
 	}
 
+	/*switch (unitNum)
+	{
+	case 1:
+	{
+		if (parent->myCoin >= 10)
+		{
+			parent->myCoin -= 10;
+			table = "fish";
+		}
+	}
+	break;
+	case 2:
+	{
+		if (parent->myCoin >= 20)
+		{
+			parent->myCoin -= 20;
+			table = "mush";
+		}
+	}
+	break;
+	case 3:
+	{
+		if (parent->myCoin >= 10)
+		{
+			parent->myCoin -= 10;
+			table = "grass";
+		}
+	}
+	break;
+	case 4:
+	{
+		if (parent->myCoin >= 20)
+		{
+			parent->myCoin -= 20;
+			table = "wood";
+		}
+	}
+	break;
+	case 5:
+	{
+		if (parent->myCoin >= 10)
+		{
+			parent->myCoin -= 10;
+			table = "cat";
+		}
+	}
+	break;
+	case 6:
+	{
+		if (parent->myCoin >= 20)
+		{
+			parent->myCoin -= 20;
+			table = "tiger";
+		}
+	}
+	break;
+	}*/
+	
 	auto parent = (InGame *)this->getParent(); //부모를 가져온다.
 	parent->doBuyWindUnit(table); //부모의 메서드를 호출한다.
 

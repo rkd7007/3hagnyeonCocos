@@ -23,18 +23,18 @@ bool Option::init()
 	auto winSize = Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 
 	//À¯´Ö ±¸¸Å ÆË¾÷ Ã¢
-	auto Pop = Sprite::create("buyUnit.png");
+	auto Pop = Sprite::create("popOption.png");
 	Pop->setAnchorPoint(Vec2(0, 0));
-	Pop->setScaleX(0.15);
-	Pop->setScaleY(0.15);
-	Pop->setPosition(Vec2(200, 40));
+	Pop->setScaleX(0.22);
+	Pop->setScaleY(0.22);
+	Pop->setPosition(Vec2(80, 0));
 	this->addChild(Pop);
 
 	//x¹öÆ°
 	auto backBut = MenuItemImage::create("xButton.png", "xButton_click.png", [&](Ref *sender) {this->removeFromParentAndCleanup(true); });
 	backBut->setAnchorPoint(Vec2(0, 0));
-	backBut->setPosition(Vec2(650, 400));
-	backBut->setScale(0.13);
+	backBut->setPosition(Vec2(800, 500));
+	backBut->setScale(0.23);
 
 	auto menu = Menu::create(backBut, NULL);
 	menu->setPosition(Point::ZERO);

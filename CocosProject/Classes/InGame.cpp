@@ -320,10 +320,10 @@ void InGame::doBuyWindUnit(std::string tableName)
 		}
 
 		start_count = true;
-		//Grass/sprite_Grass
+
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
-		cache->addSpriteFramesWithFile("ground_Gun.plist"); // 프레임캐시에 plist 정보 추가
-		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("ground_Gun1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
+		cache->addSpriteFramesWithFile("fIsh/sprite_Fish.plist"); // 프레임캐시에 plist 정보 추가
+		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("sprite_Fish1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
@@ -332,9 +332,9 @@ void InGame::doBuyWindUnit(std::string tableName)
 		auto animation = Animation::create();
 		animation->setDelayPerUnit(0.3f);
 
-		for (int i = 1; i < 6; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
+		for (int i = 1; i < 10; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
 		{
-			auto frame = cache->getSpriteFrameByName(StringUtils::format("ground_Gun%d.png", i));
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("sprite_Fish%d.png", i));
 			animation->addSpriteFrame(frame);
 		}
 
@@ -376,7 +376,7 @@ void InGame::doBuyWindUnit(std::string tableName)
 
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
 		cache->addSpriteFramesWithFile("Grass/sprite_Grass.plist"); // 프레임캐시에 plist 정보 추가
-		unitGrass[indexUnit] = Sprite::createWithSpriteFrameName("Grass/sprite_Grass1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
+		unitGrass[indexUnit] = Sprite::createWithSpriteFrameName("sprite_Grass1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
 		unitGrass[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitGrass[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitGrass[indexUnit]->setFlipX(true);
@@ -387,7 +387,7 @@ void InGame::doBuyWindUnit(std::string tableName)
 
 		for (int i = 1; i < 14; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
 		{
-			auto frame = cache->getSpriteFrameByName(StringUtils::format("Grass/sprite_Grass%d.png", i));
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("sprite_Grass%d.png", i));
 			animation->addSpriteFrame(frame);
 		}
 
@@ -426,10 +426,10 @@ void InGame::doBuyWindUnit(std::string tableName)
 		}
 
 		start_count = true;
-		//Grass/sprite_Grass
+
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
-		cache->addSpriteFramesWithFile("ground_Gun.plist"); // 프레임캐시에 plist 정보 추가
-		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("ground_Gun1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
+		cache->addSpriteFramesWithFile("cat/sprite_Cat.plist"); // 프레임캐시에 plist 정보 추가
+		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("sprite_Cat1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
@@ -438,9 +438,9 @@ void InGame::doBuyWindUnit(std::string tableName)
 		auto animation = Animation::create();
 		animation->setDelayPerUnit(0.3f);
 
-		for (int i = 1; i < 6; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
+		for (int i = 1; i < 21; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
 		{
-			auto frame = cache->getSpriteFrameByName(StringUtils::format("ground_Gun%d.png", i));
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("sprite_Cat%d.png", i));
 			animation->addSpriteFrame(frame);
 		}
 
@@ -479,10 +479,10 @@ void InGame::doBuyWindUnit(std::string tableName)
 		}
 
 		start_count = true;
-		//Grass/sprite_Grass
+
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
-		cache->addSpriteFramesWithFile("ground_Gun.plist"); // 프레임캐시에 plist 정보 추가
-		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("ground_Gun1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
+		cache->addSpriteFramesWithFile("Mush/sprite_Mush.plist"); // 프레임캐시에 plist 정보 추가
+		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("sprite_Mush1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
@@ -491,9 +491,9 @@ void InGame::doBuyWindUnit(std::string tableName)
 		auto animation = Animation::create();
 		animation->setDelayPerUnit(0.3f);
 
-		for (int i = 1; i < 6; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
+		for (int i = 1; i < 19; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
 		{
-			auto frame = cache->getSpriteFrameByName(StringUtils::format("ground_Gun%d.png", i));
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("sprite_Mush%d.png", i));
 			animation->addSpriteFrame(frame);
 		}
 
@@ -532,10 +532,10 @@ void InGame::doBuyWindUnit(std::string tableName)
 		}
 
 		start_count = true;
-		//Grass/sprite_Grass
+
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
-		cache->addSpriteFramesWithFile("ground_Gun.plist"); // 프레임캐시에 plist 정보 추가
-		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("ground_Gun1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
+		cache->addSpriteFramesWithFile("Wood/sprite_Wood.plist"); // 프레임캐시에 plist 정보 추가
+		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("sprite_Wood1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
@@ -544,9 +544,9 @@ void InGame::doBuyWindUnit(std::string tableName)
 		auto animation = Animation::create();
 		animation->setDelayPerUnit(0.3f);
 
-		for (int i = 1; i < 6; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
+		for (int i = 1; i < 21; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
 		{
-			auto frame = cache->getSpriteFrameByName(StringUtils::format("ground_Gun%d.png", i));
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("sprite_Wood%d.png", i));
 			animation->addSpriteFrame(frame);
 		}
 
@@ -585,10 +585,10 @@ void InGame::doBuyWindUnit(std::string tableName)
 		}
 
 		start_count = true;
-		//Grass/sprite_Grass
+
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
-		cache->addSpriteFramesWithFile("ground_Gun.plist"); // 프레임캐시에 plist 정보 추가
-		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("ground_Gun1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
+		cache->addSpriteFramesWithFile("tiger/sprite_Tiger.plist"); // 프레임캐시에 plist 정보 추가
+		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("sprite_Tiger1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
@@ -597,9 +597,9 @@ void InGame::doBuyWindUnit(std::string tableName)
 		auto animation = Animation::create();
 		animation->setDelayPerUnit(0.3f);
 
-		for (int i = 1; i < 6; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
+		for (int i = 1; i < 23; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
 		{
-			auto frame = cache->getSpriteFrameByName(StringUtils::format("ground_Gun%d.png", i));
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("sprite_Tiger%d.png", i));
 			animation->addSpriteFrame(frame);
 		}
 
@@ -656,6 +656,9 @@ void InGame::tick1(float f)
 		//if (pBullet->getBoundingBox().intersectsRect(pEnemy->getBoundingBox()))//충돌하면
 		if ((Bullet_x[indexBullet] <= Enemy_x + 149 && Bullet_x[indexBullet] >= Enemy_x - 149) && (Bullet_y[indexBullet] <= Enemy_y + 50 && Bullet_y[indexBullet] >= Enemy_y - 50))
 		{
+			SimpleAudioEngine::getInstance()->preloadEffect("Item Purchase.wav"); //메모리에 효과음 저장
+			SimpleAudioEngine::getInstance()->playEffect("Item Purchase.wav", false); //효과음출력
+
 			pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
 			pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
 
@@ -692,6 +695,9 @@ void InGame::tick1(float f)
 
 void InGame::popUnit(Ref* sender)
 {
+	SimpleAudioEngine::getInstance()->preloadEffect("Map Open.wav"); //메모리에 효과음 저장
+	SimpleAudioEngine::getInstance()->playEffect("Map Open.wav", false); //효과음출력
+
 	CreatePopUnit* popup = CreatePopUnit::create();
 	this->addChild(popup, 10);
 }
@@ -701,11 +707,10 @@ void InGame::createUnit()
 	srand(time(NULL));
 
 	std::string table;
-	//int rnd[3];
-	int rnd[3] = { 1,1,1 }; //테스트용
+	int rnd[3];
 
-	//for (int i = 0; i < 3; i++)
-	//	rnd[i] = rand() % 3; //0~2
+	for (int i = 0; i < 3; i++)
+		rnd[i] = rand() % 3; //0~2
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -731,6 +736,9 @@ void InGame::createUnit()
 
 void InGame::popuplayer(Ref*sender)
 {
+	SimpleAudioEngine::getInstance()->preloadEffect("EndGameSound.wav"); //메모리에 효과음 저장
+	SimpleAudioEngine::getInstance()->playEffect("EndGameSound.wav", false); //효과음출력
+
 	auto layer = GameOver::create();
 	layer->setScaleX(0.8);
 	layer->setScaleY(0.8);
