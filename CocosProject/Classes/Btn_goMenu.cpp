@@ -58,6 +58,7 @@ void Btn_goMenu::onEnter() //화면이 출력될때 동작
 	{
 		Director::getInstance()->replaceScene(StageScene::createScene());
 		SimpleAudioEngine::getInstance()->unloadEffect("EndGameSound.wav"); //메모리에서 효과음 삭제
+		CCDirector::sharedDirector()->resume(); //화면 정지
 	};
 
 
