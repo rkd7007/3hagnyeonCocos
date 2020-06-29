@@ -56,6 +56,7 @@ public:
 	int Enemy_x;
 	int Enemy_y;
 
+	int rnd;
 	//int Enemy_x2;
 	//int Enemy_y2;
 
@@ -87,6 +88,8 @@ public:
 	void timer(float f);
 	void timer_for_monsterOut(float f);
 	void tick1(float f);
+
+
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(InGame);

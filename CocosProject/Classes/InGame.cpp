@@ -248,7 +248,8 @@ void InGame::createEnemy()
 	pEnemy = Sprite::createWithSpriteFrameName("s1-removebg-preview.png");
 
 	//Àû ·£´ı ÁÂÇ¥ µîÀå
-	int rnd = rand() % 4; //0~3
+	
+	rnd = rand() % 4; //0~3
 
 	if (rnd == 0) //Ã¹¹øÂ°Ä­
 	{
