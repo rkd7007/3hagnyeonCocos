@@ -458,6 +458,7 @@ void InGame::doBuyWindUnit(std::string tableName)
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
+		unitWind[indexUnit]->setScale(0.7f);
 		this->addChild(unitWind[indexUnit]);
 
 		auto animation = Animation::create();
@@ -508,9 +509,10 @@ void InGame::doBuyWindUnit(std::string tableName)
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
 		cache->addSpriteFramesWithFile("Grass/sprite_Grass.plist"); // 프레임캐시에 plist 정보 추가
 		unitGrass[indexUnit] = Sprite::createWithSpriteFrameName("sprite_Grass1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
-		unitGrass[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
+		unitGrass[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]+20));
 		unitGrass[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitGrass[indexUnit]->setFlipX(true);
+		unitGrass[indexUnit]->setScale(0.7f);
 		this->addChild(unitGrass[indexUnit]);
 
 		auto animation = Animation::create();
@@ -564,6 +566,7 @@ void InGame::doBuyWindUnit(std::string tableName)
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
+		unitWind[indexUnit]->setScale(0.7f);
 		this->addChild(unitWind[indexUnit]);
 
 		auto animation = Animation::create();
@@ -617,6 +620,7 @@ void InGame::doBuyWindUnit(std::string tableName)
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
+		unitWind[indexUnit]->setScale(0.7f);
 		this->addChild(unitWind[indexUnit]);
 
 		auto animation = Animation::create();
@@ -670,6 +674,7 @@ void InGame::doBuyWindUnit(std::string tableName)
 		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
+		unitWind[indexUnit]->setScale(0.7f);
 		this->addChild(unitWind[indexUnit]);
 
 		auto animation = Animation::create();
@@ -720,9 +725,10 @@ void InGame::doBuyWindUnit(std::string tableName)
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
 		cache->addSpriteFramesWithFile("tiger/sprite_Tiger.plist"); // 프레임캐시에 plist 정보 추가
 		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("sprite_Tiger1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
-		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
+		unitWind[indexUnit]->setPosition(Point(testPointX[testCount]+20, testPointY[testCount]));
 		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
 		unitWind[indexUnit]->setFlipX(true);
+		unitWind[indexUnit]->setScale(0.7f);
 		this->addChild(unitWind[indexUnit]);
 
 		auto animation = Animation::create();
