@@ -20,6 +20,7 @@ public:
 	void PlayStage1(Ref* sender);
 	void PlayStage2(Ref* sender);
 	void PlayStage3(Ref* sender);
+	void popupOption(Ref* sender);
 
     // implement the "static create()" method manually
     CREATE_FUNC(StageScene);
