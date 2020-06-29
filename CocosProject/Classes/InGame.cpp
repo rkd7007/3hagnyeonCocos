@@ -244,12 +244,7 @@ bool InGame::onTouchBegan(Touch* touch, Event* event)
 
 void InGame::createEnemy()
 {
-	auto cache = SpriteFrameCache::getInstance();
-	cache->addSpriteFramesWithFile("shark.plist");
-	pEnemy = Sprite::createWithSpriteFrameName("s1-removebg-preview.png");
-
 	//Àû ·£´ý ÁÂÇ¥ µîÀå
-	
 	rnd = rand() % 4; //0~3
 
 	if (rnd == 0) //Ã¹¹øÂ°Ä­
@@ -274,32 +269,63 @@ void InGame::createEnemy()
 
 	Enemy_x = 900;
 
+	int enemy_rand = rand() % 2; //0~1
 
-	//1¹øÂ° Àû
-	pEnemy->setPosition(Point(Enemy_x, Enemy_y));
-	pEnemy->setScale(0.8f);
-	pEnemy->setFlipX(true);
-
-	this->addChild(pEnemy);
-	auto animation = Animation::create();
-	animation->setDelayPerUnit(0.2f);
-
-	for (int i = 1; i < 3; i++)
+	if (enemy_rand == 0)
 	{
-		auto frame = cache->getSpriteFrameByName(StringUtils::format("s%d-removebg-preview.png", i));
-		animation->addSpriteFrame(frame);
+		auto cache = SpriteFrameCache::getInstance();
+		cache->addSpriteFramesWithFile("Girl/sprite_girl.plist");
+		pEnemy = Sprite::createWithSpriteFrameName("sprite_girl1.png");
+
+		pEnemy->setPosition(Point(Enemy_x, Enemy_y));
+		pEnemy->setScale(0.8f);
+
+		this->addChild(pEnemy);
+		auto animation = Animation::create();
+		animation->setDelayPerUnit(0.2f);
+
+		for (int i = 1; i < 12; i++)
+		{
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("sprite_girl%d.png", i));
+			animation->addSpriteFrame(frame);
+		}
+
+		auto animate = Animate::create(animation);
+		auto action = RepeatForever::create(animate);
+		pEnemy->runAction(action);
+
+		auto action_test = MoveTo::create(4, Vec2(0, Enemy_y));//¿ÞÂÊ
+
+		pEnemy->runAction(action_test);
 	}
 
-	auto animate = Animate::create(animation);
-	auto action = RepeatForever::create(animate);
-	pEnemy->runAction(action);
+	if (enemy_rand == 1)
+	{
+		auto cache = SpriteFrameCache::getInstance();
+		cache->addSpriteFramesWithFile("Man/sprite_Man.plist");
+		pEnemy = Sprite::createWithSpriteFrameName("sprite_Man1.png");
 
-	auto action_test = MoveTo::create(4, Vec2(0, Enemy_y));//¿ÞÂÊ
-	
-	pEnemy->runAction(action_test);
+		pEnemy->setPosition(Point(Enemy_x, Enemy_y));
+		pEnemy->setScale(0.8f);
 
-	//count_enemy += 1; //Àû ¼ö Áõ°¡
-	//log("ÀûÀÇ ¼ö : %d", count_enemy);
+		this->addChild(pEnemy);
+		auto animation = Animation::create();
+		animation->setDelayPerUnit(0.2f);
+
+		for (int i = 1; i < 13; i++)
+		{
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("sprite_Man%d.png", i));
+			animation->addSpriteFrame(frame);
+		}
+
+		auto animate = Animate::create(animation);
+		auto action = RepeatForever::create(animate);
+		pEnemy->runAction(action);
+
+		auto action_test = MoveTo::create(4, Vec2(0, Enemy_y));//¿ÞÂÊ
+
+		pEnemy->runAction(action_test);
+	}
 }
 
 //void InGame::createEnemy2()
