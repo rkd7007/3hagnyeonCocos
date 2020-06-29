@@ -221,12 +221,13 @@ void InGame::createBullet()
 
 	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
-		pBullet[indexBullet] = Sprite::create("ball.png");
+		pBullet[indexBullet] = Sprite::create("grass_attack.png");
+		pBullet[indexBullet]->setScale(0.3);
 		pBullet[indexBullet]->setPosition(Vec2(testPointX[indexBullet] + 50, testPointY[indexBullet]));
 
 		this->addChild(pBullet[indexBullet]);
 
-		auto myActionForward = MoveTo::create(1, Vec2(950, testPointY[indexBullet])); //정면으로 날리기
+		auto myActionForward = MoveTo::create(1, Vec2(1000, testPointY[indexBullet])); //정면으로 날리기
 		auto myAction = Sequence::create(Place::create(Vec2(testPointX[indexBullet] + 50, testPointY[indexBullet])), myActionForward, nullptr); //원래 위치로 바꾸기
 		pBullet[indexBullet]->runAction(myAction);
 	}
@@ -828,14 +829,12 @@ void InGame::tick1(float f)
 
 	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
-		 if (Bullet_x[indexBullet] >= 800)
+		 if (Bullet_x[indexBullet] >= 1000)
 		{
 			pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
 			pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
 		}
 	}
-
-
 }
 
 void InGame::popUnit(Ref* sender)
