@@ -54,6 +54,7 @@ public:
 
 	//유닛--------------------------------------------------------
 	cocos2d::Sprite* unitWind[30]; //플레이어 이미지
+	cocos2d::Sprite* unitGrass[30]; //플레이어 이미지
 	int indexUnit;
 	void createUnit(); //초기 세마리 유닛 만듦
 	void doBuyWindUnit(std::string tableName);

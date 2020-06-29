@@ -3,7 +3,11 @@
 #include "CreatePopUnit.h"
 #include "GameOver.h"
 
+USING_NS_CC;
+
 using namespace cocos2d;
+using namespace cocos2d::ui;
+
 
 //오디오 소스 관련 네임스페이스 선언 
 using namespace CocosDenshion;
@@ -371,25 +375,25 @@ void InGame::doBuyWindUnit(std::string tableName)
 		start_count = true;
 
 		auto cache = SpriteFrameCache::getInstance(); // 프레임 캐시 생성 (하나만 존재하는 싱글턴 객체)
-		cache->addSpriteFramesWithFile("ground_Gun.plist"); // 프레임캐시에 plist 정보 추가
-		unitWind[indexUnit] = Sprite::createWithSpriteFrameName("ground_Gun1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
-		unitWind[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
-		unitWind[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
-		unitWind[indexUnit]->setFlipX(true);
-		this->addChild(unitWind[indexUnit]);
+		cache->addSpriteFramesWithFile("Grass/sprite_Grass.plist"); // 프레임캐시에 plist 정보 추가
+		unitGrass[indexUnit] = Sprite::createWithSpriteFrameName("Grass/sprite_Grass1.png"); // 프레임캐시에서 애니메이션 기준 이미지 생성
+		unitGrass[indexUnit]->setPosition(Point(testPointX[testCount], testPointY[testCount]));
+		unitGrass[indexUnit]->setAnchorPoint(Vec2(0.5, 0.5));
+		unitGrass[indexUnit]->setFlipX(true);
+		this->addChild(unitGrass[indexUnit]);
 
 		auto animation = Animation::create();
 		animation->setDelayPerUnit(0.3f);
 
-		for (int i = 1; i < 6; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
+		for (int i = 1; i < 14; i++) // 프레임캐시에서 이미지들을 가져와 animation에 등록
 		{
-			auto frame = cache->getSpriteFrameByName(StringUtils::format("ground_Gun%d.png", i));
+			auto frame = cache->getSpriteFrameByName(StringUtils::format("Grass/sprite_Grass%d.png", i));
 			animation->addSpriteFrame(frame);
 		}
 
 		auto animate = Animate::create(animation);
 		auto action = RepeatForever::create(animate);
-		unitWind[indexUnit]->runAction(action);
+		unitGrass[indexUnit]->runAction(action);
 	}
 	if (tableName == "cat"  && testCount < 16)
 	{
