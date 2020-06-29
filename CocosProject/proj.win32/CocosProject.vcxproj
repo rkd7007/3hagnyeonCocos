@@ -156,6 +156,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\InGame.cpp" />
     <ClCompile Include="..\Classes\Option.cpp" />
     <ClCompile Include="..\Classes\StageScene.cpp" />
+    <ClCompile Include="..\Classes\Stage_clear.cpp" />
     <ClCompile Include="..\Classes\TouchBtn.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\InGame.h" />
     <ClInclude Include="..\Classes\Option.h" />
     <ClInclude Include="..\Classes\StageScene.h" />
+    <ClInclude Include="..\Classes\Stage_clear.h" />
     <ClInclude Include="..\Classes\TouchBtn.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

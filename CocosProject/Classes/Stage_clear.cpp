@@ -1,6 +1,6 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
-#include "GameOver.h"
+#include "Stage_clear.h"
 #include "InGame.h"
 
 USING_NS_CC;
@@ -16,7 +16,7 @@ static void problemLoading(const char* filename)
 }
 
 // on "init" you need to initialize your instance
-bool GameOver::init()
+bool Stage_clear::init()
 {
 	//////////////////////////////
 	// 1. super init first
@@ -29,15 +29,12 @@ bool GameOver::init()
 	//parent->time_count;
 	//parent->timer_label;
 
-	SimpleAudioEngine::getInstance()->preloadEffect("EndGameSound.wav"); //메모리에 효과음 저장
-	SimpleAudioEngine::getInstance()->playEffect("EndGameSound.wav", false); //효과음출력
-
-	auto back_main = Sprite::create("gameover.png");
+	auto back_main = Sprite::create("stage_clear.png");
 	back_main->setAnchorPoint(Vec2(0, 0));
 	back_main->setPosition(200, -40);
 	back_main->setScale(0.25f);
 	this->addChild(back_main);
-	
+
 	auto exit = TouchBtn::create("xButton.png");
 	exit->setAnchorPoint(Vec2(0, 0));
 	exit->setPosition(690, 470);
@@ -61,21 +58,21 @@ bool GameOver::init()
 
 
 
-void GameOver::GoBack(Ref*sender)
+void Stage_clear::GoBack(Ref*sender)
 {
 	this->removeFromParentAndCleanup(true);
 }
 
-void GameOver::SceneMove(Ref*sender)
-{	
-//유닛 모음 창 생성
-//	auto go_menu = Label::createWithSystemFont("유닛", "DAON_2.28(L)", 20);
-//	auto go_menuitem = MenuItemLabel::create(go_menu, CC_CALLBACK_1(GameOver::SceneMove(), this));
-//	go_menuitem->setColor(Color3B(0, 0, 0));
-//	go_menuitem->setAnchorPoint(ccp(0, 0)); //중심점이 좌측 하단
-//	go_menuitem->setPosition(Point(380, 50));
-//
-//	auto menu = Menu::create(go_menu, NULL);
-//	this->addChild(menu);
-//	Director::getInstance()->replaceScene(StageScene::createScene());
+void Stage_clear::SceneMove(Ref*sender)
+{
+	//유닛 모음 창 생성
+	//	auto go_menu = Label::createWithSystemFont("유닛", "DAON_2.28(L)", 20);
+	//	auto go_menuitem = MenuItemLabel::create(go_menu, CC_CALLBACK_1(GameOver::SceneMove(), this));
+	//	go_menuitem->setColor(Color3B(0, 0, 0));
+	//	go_menuitem->setAnchorPoint(ccp(0, 0)); //중심점이 좌측 하단
+	//	go_menuitem->setPosition(Point(380, 50));
+	//
+	//	auto menu = Menu::create(go_menu, NULL);
+	//	this->addChild(menu);
+	//	Director::getInstance()->replaceScene(StageScene::createScene());
 }

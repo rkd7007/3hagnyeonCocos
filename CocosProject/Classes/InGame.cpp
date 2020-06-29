@@ -2,6 +2,7 @@
 #include "SimpleAudioEngine.h"
 #include "CreatePopUnit.h"
 #include "GameOver.h"
+#include "Stage_clear.h"
 
 USING_NS_CC;
 
@@ -52,7 +53,7 @@ bool InGame::init()
 	createUnit(); //초기 랜덤 캐릭터 세마리 생성
 
 	this->schedule(schedule_selector(InGame::timer), 1.0f); //1초간격으로 tick1 작동
-
+	
 	return true;
 }
 
@@ -68,7 +69,6 @@ void InGame::BaseFunc()
 	myCoin = 0; //점수
 	testPointX[0] = 100;
 	testPointY[0] = 380;
-	Enemy_x = 900;
 
 	//배경
 	auto back_main = Sprite::create("gameMap.png");
@@ -162,8 +162,9 @@ void InGame::update(float f)
 	if (this->B_time <= 0)
 	{
 		this->B_time = 50;
-
 	}
+
+
 }
 
 void InGame::timer(float f)
@@ -175,7 +176,7 @@ void InGame::timer(float f)
 	{
 		//게임 종료
 		SimpleAudioEngine::getInstance()->unloadEffect("GunSound.wav"); //메모리에서 효과음 삭제
-		popuplayer(this);
+		popuplayer_stage(this); //스테이지 클리어 팝업 띄우기
 	}
 }
 
@@ -184,7 +185,7 @@ void InGame::timer_for_monsterOut(float f)
 {
 	//게임 종료
 	SimpleAudioEngine::getInstance()->unloadEffect("GunSound.wav"); //메모리에서 효과음 삭제
-	popuplayer(this);
+	popuplayer_stage(this);//스테이지 클리어 팝업 띄우기
 
 }
 
@@ -249,14 +250,29 @@ void InGame::createEnemy()
 	int rnd = rand() % 4; //0~3
 
 	if (rnd == 0) //첫번째칸
+	{
 		Enemy_y = 380;
-	if(rnd == 1) //두번째칸
-		Enemy_y = 300;
-	if (rnd == 2) //세번째칸
-		Enemy_y = 220;
-	if (rnd == 3) //네번째칸
-		Enemy_y = 140;
+	}
 
+	if (rnd == 1) //두번째칸
+	{
+		Enemy_y = 300;
+	}
+		
+	if (rnd == 2) //세번째칸
+	{
+		Enemy_y = 220;
+	}
+
+	if (rnd == 3) //네번째칸
+	{
+		Enemy_y = 140;
+	}	
+
+	Enemy_x = 900;
+
+
+	//1번째 적
 	pEnemy->setPosition(Point(Enemy_x, Enemy_y));
 	pEnemy->setScale(0.8f);
 	pEnemy->setFlipX(true);
@@ -276,16 +292,102 @@ void InGame::createEnemy()
 	pEnemy->runAction(action);
 
 	auto action_test = MoveTo::create(4, Vec2(0, Enemy_y));//왼쪽
-
+	
 	pEnemy->runAction(action_test);
 
-	count_enemy += 1; //적 수 증가
-	log("적의 수 : %d", count_enemy);
-
-	//적이 100마리가 넘어가면
-	if (count_enemy >= 100)
-		MaxEnemy = true;
+	//count_enemy += 1; //적 수 증가
+	//log("적의 수 : %d", count_enemy);
 }
+
+//void InGame::createEnemy2()
+//{
+//	auto cache2 = SpriteFrameCache::getInstance();
+//	cache2->addSpriteFramesWithFile("shark.plist");
+//	pEnemy2 = Sprite::createWithSpriteFrameName("s1-removebg-preview.png");
+//
+//	//적 랜덤 좌표 등장
+//	int rnd = rand() % 4; //0~3
+//
+//	if (rnd == 0) //첫번째칸
+//	{
+//		Enemy_y = 380;
+//		int rnd2 = rand() % 3 + 1;
+//
+//		if (rnd2 == 1) //두번째칸
+//			Enemy_y2 = 300;
+//		if (rnd2 == 2) //세번째칸
+//			Enemy_y2 = 220;
+//		if (rnd2 == 3) //네번째칸
+//			Enemy_y2 = 140;
+//	}
+//
+//	if (rnd == 1) //두번째칸
+//	{
+//		Enemy_y = 300;
+//		int rnd2 = rand() % 4;
+//
+//		if (rnd == 0) //첫번째칸
+//			Enemy_y2 = 380;
+//		if (rnd == 1) //두번째칸
+//			rnd2 = rand() % 4;
+//		if (rnd == 2) //세번째칸
+//			Enemy_y2 = 220;
+//		if (rnd == 3) //네번째칸
+//			Enemy_y2 = 140;
+//	}
+//
+//	if (rnd == 2) //세번째칸
+//	{
+//		Enemy_y = 220;
+//		int rnd2 = rand() % 4;
+//
+//		if (rnd == 0) //첫번째칸
+//			Enemy_y2 = 380;
+//		if (rnd == 1) //두번째칸
+//			Enemy_y2 = 300;
+//		if (rnd == 2) //세번째칸
+//			rnd2 = rand() % 4;
+//		if (rnd == 3) //네번째칸
+//			Enemy_y2 = 140;
+//	}
+//
+//	if (rnd == 3) //네번째칸
+//	{
+//		Enemy_y = 140;
+//		int rnd2 = rand() % 3;
+//
+//		if (rnd == 0) //첫번째칸
+//			Enemy_y2 = 380;
+//		if (rnd == 1) //두번째칸
+//			Enemy_y2 = 300;
+//		if (rnd == 2) //세번째칸
+//			Enemy_y2 = 140;
+//	}
+//
+//	Enemy_x2 = 900;
+//
+//	//2번째 적
+//	pEnemy2->setPosition(Point(Enemy_x2, Enemy_y2));
+//	pEnemy2->setScale(0.8f);
+//	pEnemy2->setFlipX(true);
+//	this->addChild(pEnemy2);
+//	auto animation2 = Animation::create();
+//	animation2->setDelayPerUnit(0.2f);
+//	for (int i = 1; i < 3; i++)
+//	{
+//		auto frame2 = cache2->getSpriteFrameByName(StringUtils::format("s%d-removebg-preview.png", i));
+//		animation2->addSpriteFrame(frame2);
+//	}
+//
+//	auto animate2 = Animate::create(animation2);
+//	auto action2 = RepeatForever::create(animate2);
+//	pEnemy2->runAction(action2);
+//
+//	auto action_test2 = MoveTo::create(4, Vec2(0, Enemy_y2));//왼쪽
+//
+//	pEnemy2->runAction(action_test2);
+//}
+
 
 void InGame::doBuyWindUnit(std::string tableName)
 {
@@ -628,10 +730,17 @@ void InGame::tick1(float f)
 			this->createBullet(); //총알 생성		
 		}
 	}
+
 	if (pEnemy == nullptr)
 	{
 		this->createEnemy(); //적 생성
 	}
+
+	//if (pEnemy2 == nullptr)
+	//{
+	//	this->createEnemy2(); //적 생성
+	//}
+
 
 	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
@@ -642,22 +751,18 @@ void InGame::tick1(float f)
 	Enemy_x = pEnemy->getPosition().x;
 	Enemy_y = pEnemy->getPosition().y;
 
-	if (Enemy_x <= 20) //왼쪽 끝에 도달하면
-	{
-		pEnemy->removeFromParentAndCleanup(true); //적제거
-		pEnemy = nullptr;
+	//Enemy_x2 = pEnemy2->getPosition().x;
+	//Enemy_y2 = pEnemy2->getPosition().y;
 
-		hp_count -= 1;
-		Hp_label->setString(StringUtils::format("%3d", hp_count)); //레이블 수정
-	}
 
 	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
-		//if (pBullet->getBoundingBox().intersectsRect(pEnemy->getBoundingBox()))//충돌하면
-		if ((Bullet_x[indexBullet] <= Enemy_x + 149 && Bullet_x[indexBullet] >= Enemy_x - 149) && (Bullet_y[indexBullet] <= Enemy_y + 50 && Bullet_y[indexBullet] >= Enemy_y - 50))
+		if ((Bullet_x[indexBullet] <= Enemy_x+ 149 && Bullet_x[indexBullet] >= Enemy_x - 149) 
+			&& (Bullet_y[indexBullet] <= Enemy_y + 50 && Bullet_y[indexBullet] >= Enemy_y - 50))
 		{
 			SimpleAudioEngine::getInstance()->preloadEffect("Item Purchase.wav"); //메모리에 효과음 저장
 			SimpleAudioEngine::getInstance()->playEffect("Item Purchase.wav", false); //효과음출력
+
 
 			pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
 			pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
@@ -667,30 +772,70 @@ void InGame::tick1(float f)
 
 			bChange = true;
 
-			//auto particle = ParticleGalaxy::create();
-			//particle->setDuration(0.2f); //출력 시간
-			//particle->setSpeed(100); //진행 시간
-			//particle->setGravity(Point(0, 300)); //y축으로 중력을 300정도 지정
-			//particle->setAutoRemoveOnFinish(true); //파티클 지속시간 종료 후 자동제거
-			//particle->setPosition(Vec2(pEnemy->getPositionX(), pEnemy->getPositionY()));
-			//this->addChild(particle);
 		}
+
+		//if ((Bullet_x[indexBullet] <= Enemy_x2 + 149 && Bullet_x[indexBullet] >= Enemy_x2 - 149)
+		//	&& (Bullet_y[indexBullet] <= Enemy_y2 + 50 && Bullet_y[indexBullet] >= Enemy_y2 - 50))
+		//{
+		//	SimpleAudioEngine::getInstance()->preloadEffect("Item Purchase.wav"); //메모리에 효과음 저장
+		//	SimpleAudioEngine::getInstance()->playEffect("Item Purchase.wav", false); //효과음출력
+
+
+		//	pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
+		//	pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
+
+		//	myCoin += 5;
+		//	coin_label->setString(StringUtils::format("%3d", myCoin)); //레이블 수정
+
+		//	bChange2 = true;
+		//}
+
+		if (Enemy_x <= 20 && !bChange) //왼쪽 끝에 도달하면
+		{
+			bChange = true;
+
+			hp_count -= 1;
+			Hp_label->setString(StringUtils::format("%3d", hp_count)); //레이블 수정
+		}
+
+		//if (Enemy_x2 <= 20 && !bChange2) //왼쪽 끝에 도달하면
+		//{
+		//	bChange2 = true;
+
+		//	hp_count -= 1;
+		//	Hp_label->setString(StringUtils::format("%3d", hp_count)); //레이블 수정
+		//}
 	}
 	if (bChange)
 	{
-		pEnemy->removeFromParentAndCleanup(true); //적제거
+		pEnemy ->removeFromParentAndCleanup(true); //적제거
 		pEnemy = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
-
 		bChange = false;
 	}
+
+	//if (bChange2)
+	//{
+	//	pEnemy2->removeFromParentAndCleanup(true); //적제거
+	//	pEnemy2 = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
+	//	bChange2 = false;
+	//}
+
+	if (hp_count <= 0)//사운드출력이 한번만 되어야하는데, 여러번 됨
+	{
+		SimpleAudioEngine::getInstance()->unloadEffect("GunSound.wav"); //메모리에서 효과음 삭제
+		popuplayer(this);
+	}
+
 	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
-		 if (Bullet_x[indexBullet] >= 900)
+		 if (Bullet_x[indexBullet] >= 800)
 		{
 			pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
 			pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
 		}
 	}
+
+
 }
 
 void InGame::popUnit(Ref* sender)
@@ -736,10 +881,16 @@ void InGame::createUnit()
 
 void InGame::popuplayer(Ref*sender)
 {
-	SimpleAudioEngine::getInstance()->preloadEffect("EndGameSound.wav"); //메모리에 효과음 저장
-	SimpleAudioEngine::getInstance()->playEffect("EndGameSound.wav", false); //효과음출력
-
 	auto layer = GameOver::create();
+	layer->setScaleX(0.8);
+	layer->setScaleY(0.8);
+	this->addChild(layer);
+}
+
+
+void InGame::popuplayer_stage(Ref*sender)
+{
+	auto layer = Stage_clear::create();
 	layer->setScaleX(0.8);
 	layer->setScaleY(0.8);
 	this->addChild(layer);

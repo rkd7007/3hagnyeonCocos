@@ -31,7 +31,8 @@ public:
 	int testCount = 0;
 
 	bool bChange;
-	
+	//bool bChange2;
+
 	//터치--------------------------------------------------------
 	void c_MoveToTouch(); //터치한 곳으로 캐릭터 이동시키는 함수
 	bool onTouchBegan(Touch* touch, Event* event); //터치 좌표 받아오는 함수
@@ -41,16 +42,22 @@ public:
 	//팝업창--------------------------------------------------------
 	void popUnit(Ref* sender); //유닛 구매하는 팝업 창
 	void popuplayer(Ref*sender); //게임 오버 팝업 창
+	void popuplayer_stage(Ref*sender); //스테이지클리어 팝업 창
 
 	//적--------------------------------------------------------
 	cocos2d::Sprite* pEnemy; //적 이미지
+	//cocos2d::Sprite* pEnemy2; //적 이미지
 	void createEnemy(); //적 만듦 - 참고 : https://rudalstb.tistory.com/74
+	void createEnemy2();
 	int count_enemy; //적이 몇마리 생성됐는지 카운트
 	bool MaxEnemy; //max까지 적이 생성됐는지
 	int Hp = 5;
 	int E_time; //적 생성 시간
 	int Enemy_x;
 	int Enemy_y;
+
+	//int Enemy_x2;
+	//int Enemy_y2;
 
 	//유닛--------------------------------------------------------
 	cocos2d::Sprite* unitWind[30]; //플레이어 이미지

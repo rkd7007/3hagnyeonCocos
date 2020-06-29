@@ -1,5 +1,8 @@
 #include "TouchBtn.h"
+#include "SimpleAudioEngine.h"
 
+//오디오 소스 관련 네임스페이스 선언 
+using namespace CocosDenshion;
 USING_NS_CC;
 
 
@@ -33,7 +36,7 @@ void TouchBtn::onEnter() //화면이 출력될때 동작
 
 		if (rect.containsPoint(LocationInNode)) //해당몬스터가 터치되었는가?
 		{
-			this->setColor(Color3B::RED);
+			this->setColor(Color3B(127, 127, 127));
 			
 			return true;
 		}
@@ -50,7 +53,8 @@ void TouchBtn::onEnter() //화면이 출력될때 동작
 	};
 
 	listener->onTouchEnded = [=](Touch * touch, Event * evnet)
-	{
+	{	
+		SimpleAudioEngine::getInstance()->unloadEffect("EndGameSound.wav"); //메모리에서 효과음 삭제
 		exit(0);
 	};
 
