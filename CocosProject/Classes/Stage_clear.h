@@ -17,7 +17,6 @@ public:
 	virtual bool init();
 	void SceneMove(Ref*sender);
 
-
 	void GoBack(Ref * sender);
 	CREATE_FUNC(Stage_clear);
 };

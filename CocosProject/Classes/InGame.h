@@ -81,11 +81,9 @@ public:
 
 	//코인--------------------------------------------------------
 	cocos2d::Label* coin_label; //점수
-	int myCoin;
 
 	//시간--------------------------------------------------------
 	cocos2d::Label*timer_label;
-	int time_count;
 	void timer(float f);
 	void timer_for_monsterOut(float f);
 	void tick1(float f);

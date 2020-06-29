@@ -9,6 +9,8 @@ USING_NS_CC;
 using namespace cocos2d;
 using namespace cocos2d::ui;
 
+int myCoin;
+int time_count;
 
 //오디오 소스 관련 네임스페이스 선언 
 using namespace CocosDenshion;
@@ -61,7 +63,7 @@ void InGame::BaseFunc()
 {
 	//변수 초기화
 	time_count = 30; //시간
-	hp_count = 5; //체력
+	hp_count = 0; //체력
 	E_time = 50;
 	B_time = 50;
 	c_Xpoint = 300;

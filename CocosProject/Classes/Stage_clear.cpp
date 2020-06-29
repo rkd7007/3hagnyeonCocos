@@ -8,6 +8,8 @@ USING_NS_CC;
 //오디오 소스 관련 네임스페이스 선언 
 using namespace CocosDenshion;
 
+extern int myCoin;
+extern int time_count;
 
 static void problemLoading(const char* filename)
 {
@@ -49,14 +51,23 @@ bool Stage_clear::init()
 	go_menu->setPriorityWithThis(true);
 	this->addChild(go_menu);
 
+	auto coin = Label::createWithTTF("%3d", "fonts/Maplestory Bold.ttf", 30);
+	coin->setString(StringUtils::format("%3d", myCoin));
+	coin->setPosition(550, 255);
+	coin->setColor(Color3B::WHITE);
+	this->addChild(coin);
+
+	auto time = Label::createWithTTF("%3d", "fonts/Maplestory Bold.ttf", 30);
+	time->setString(StringUtils::format("%3d", time_count));
+	time->setPosition(550, 168);
+	time->setColor(Color3B::WHITE);
+	this->addChild(time);
+
 	//timer_label->setPosition(380, 100);
 	//timer_label->setString(StringUtils::format("Time : %3d", parent->time_count));
 
-
 	return true;
 }
-
-
 
 void Stage_clear::GoBack(Ref*sender)
 {
