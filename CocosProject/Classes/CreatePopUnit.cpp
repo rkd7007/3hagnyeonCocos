@@ -5,6 +5,8 @@
 
 USING_NS_CC;
 
+extern int myCoin;
+
 //오디오 소스 관련 네임스페이스 선언
 using namespace CocosDenshion;
 
@@ -118,85 +120,65 @@ void CreatePopUnit::CreateUnit(Ref* sneder, int unitNum)
 	switch (unitNum)
 	{
 	case 1:
-		table = "fish";
-	break;
-	case 2:
-		table = "mush";
-	break;
-	case 3:
-		table = "grass";
-	break;
-	case 4:
-		table = "wood";
-	break;
-	case 5:
-		table = "cat";
-	break;
-	case 6:
-		table = "tiger";
-	break;
-	}
-
-	/*switch (unitNum)
 	{
-	case 1:
-	{
-		if (parent->myCoin >= 10)
+		if (myCoin >= 10)
 		{
-			parent->myCoin -= 10;
+			myCoin -= 10;
 			table = "fish";
 		}
 	}
 	break;
 	case 2:
 	{
-		if (parent->myCoin >= 20)
+		if (myCoin >= 20)
 		{
-			parent->myCoin -= 20;
+			myCoin -= 20;
 			table = "mush";
 		}
 	}
 	break;
 	case 3:
 	{
-		if (parent->myCoin >= 10)
+		if (myCoin >= 10)
 		{
-			parent->myCoin -= 10;
+			myCoin -= 10;
 			table = "grass";
 		}
 	}
 	break;
 	case 4:
 	{
-		if (parent->myCoin >= 20)
+		if (myCoin >= 20)
 		{
-			parent->myCoin -= 20;
+			myCoin -= 20;
 			table = "wood";
 		}
 	}
 	break;
 	case 5:
 	{
-		if (parent->myCoin >= 10)
+		if (myCoin >= 10)
 		{
-			parent->myCoin -= 10;
+			myCoin -= 10;
 			table = "cat";
 		}
 	}
 	break;
 	case 6:
 	{
-		if (parent->myCoin >= 20)
+		if (myCoin >= 20)
 		{
-			parent->myCoin -= 20;
+			myCoin -= 20;
 			table = "tiger";
 		}
 	}
 	break;
-	}*/
+	}
 	
 	auto parent = (InGame *)this->getParent(); //부모를 가져온다.
 	parent->doBuyWindUnit(table); //부모의 메서드를 호출한다.
 
 	this->removeFromParentAndCleanup(true);
+
+	SimpleAudioEngine::getInstance()->unloadEffect("Cash Register.wav");
 }

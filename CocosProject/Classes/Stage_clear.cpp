@@ -27,9 +27,8 @@ bool Stage_clear::init()
 		return false;
 	}
 
-	//auto parent = (InGame *)this->getParent();
-	//parent->time_count;
-	//parent->timer_label;
+	SimpleAudioEngine::getInstance()->preloadEffect("Win.wav"); //메모리에 효과음 저장
+	SimpleAudioEngine::getInstance()->playEffect("Win.wav", false); //효과음출력
 
 	auto back_main = Sprite::create("stage_clear.png");
 	back_main->setAnchorPoint(Vec2(0, 0));
@@ -63,14 +62,13 @@ bool Stage_clear::init()
 	time->setColor(Color3B::WHITE);
 	this->addChild(time);
 
-	//timer_label->setPosition(380, 100);
-	//timer_label->setString(StringUtils::format("Time : %3d", parent->time_count));
-
 	return true;
 }
 
 void Stage_clear::GoBack(Ref*sender)
 {
+	SimpleAudioEngine::getInstance()->unloadEffect("Win.wav");
+
 	this->removeFromParentAndCleanup(true);
 }
 

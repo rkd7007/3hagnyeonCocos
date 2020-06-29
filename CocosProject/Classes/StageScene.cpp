@@ -98,4 +98,6 @@ void StageScene::popupOption(Ref*sender)
 	layer->setScaleX(0.8);
 	layer->setScaleY(0.8);
 	this->addChild(layer);
+
+	SimpleAudioEngine::getInstance()->unloadEffect("Map Open.wav");
 }

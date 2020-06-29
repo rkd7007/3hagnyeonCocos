@@ -62,13 +62,13 @@ bool InGame::init()
 void InGame::BaseFunc()
 {
 	//변수 초기화
-	time_count = 30; //시간
-	hp_count = 0; //체력
+	time_count = 60; //시간
+	hp_count = 5; //체력
+	myCoin = 0; //코인
 	E_time = 50;
 	B_time = 50;
 	c_Xpoint = 300;
 	c_Ypoint = 300;
-	myCoin = 0; //점수
 	testPointX[0] = 100;
 	testPointY[0] = 380;
 
@@ -131,6 +131,8 @@ void InGame::BaseFunc()
 
 void InGame::update(float f)
 {
+	coin_label->setString(StringUtils::format("%3d", myCoin));
+
 	this->E_time -= f;
 	this->B_time -= f;
 
@@ -182,7 +184,6 @@ void InGame::timer(float f)
 	}
 }
 
-
 void InGame::timer_for_monsterOut(float f)
 {
 	//게임 종료
@@ -190,8 +191,6 @@ void InGame::timer_for_monsterOut(float f)
 	popuplayer_stage(this);//스테이지 클리어 팝업 띄우기
 
 }
-
-
 
 void InGame::createBullet()
 {
@@ -770,10 +769,8 @@ void InGame::tick1(float f)
 			pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
 
 			myCoin += 5;
-			coin_label->setString(StringUtils::format("%3d", myCoin)); //레이블 수정
 
 			bChange = true;
-
 		}
 
 		//if ((Bullet_x[indexBullet] <= Enemy_x2 + 149 && Bullet_x[indexBullet] >= Enemy_x2 - 149)
@@ -847,6 +844,8 @@ void InGame::popUnit(Ref* sender)
 
 	CreatePopUnit* popup = CreatePopUnit::create();
 	this->addChild(popup, 10);
+
+	SimpleAudioEngine::getInstance()->unloadEffect("Map Open.wav");
 }
 
 void InGame::createUnit()
@@ -883,15 +882,22 @@ void InGame::createUnit()
 
 void InGame::popuplayer(Ref*sender)
 {
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+
+	CCDirector::sharedDirector()->pause(); //화면 정지
+
 	auto layer = GameOver::create();
 	layer->setScaleX(0.8);
 	layer->setScaleY(0.8);
 	this->addChild(layer);
 }
 
-
 void InGame::popuplayer_stage(Ref*sender)
 {
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+
+	CCDirector::sharedDirector()->pause(); //화면 정지
+
 	auto layer = Stage_clear::create();
 	layer->setScaleX(0.8);
 	layer->setScaleY(0.8);

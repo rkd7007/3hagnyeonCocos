@@ -27,10 +27,6 @@ bool GameOver::init()
 		return false;
 	}
 
-	//auto parent = (InGame *)this->getParent();
-	//parent->time_count;
-	//parent->timer_label;
-
 	SimpleAudioEngine::getInstance()->preloadEffect("EndGameSound.wav"); //메모리에 효과음 저장
 	SimpleAudioEngine::getInstance()->playEffect("EndGameSound.wav", false); //효과음출력
 
@@ -73,10 +69,10 @@ bool GameOver::init()
 	return true;
 }
 
-
-
 void GameOver::GoBack(Ref*sender)
 {
+	SimpleAudioEngine::getInstance()->unloadEffect("EndGameSound.wav");
+
 	this->removeFromParentAndCleanup(true);
 }
 
