@@ -31,7 +31,6 @@ public:
 	int testCount = 0;
 
 	bool bChange;
-	//bool bChange2;
 
 	//터치--------------------------------------------------------
 	void c_MoveToTouch(); //터치한 곳으로 캐릭터 이동시키는 함수
@@ -48,7 +47,6 @@ public:
 	cocos2d::Sprite* pEnemy; //적 이미지
 	//cocos2d::Sprite* pEnemy2; //적 이미지
 	void createEnemy(); //적 만듦 - 참고 : https://rudalstb.tistory.com/74
-	void createEnemy2();
 	int count_enemy; //적이 몇마리 생성됐는지 카운트
 	bool MaxEnemy; //max까지 적이 생성됐는지
 	int Hp = 5;
@@ -57,8 +55,6 @@ public:
 	int Enemy_y;
 
 	int rnd;
-	//int Enemy_x2;
-	//int Enemy_y2;
 
 	//유닛--------------------------------------------------------
 	cocos2d::Sprite* unitWind[30]; //플레이어 이미지
@@ -88,8 +84,6 @@ public:
 	void timer(float f);
 	void timer_for_monsterOut(float f);
 	void tick1(float f);
-
-
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(InGame);

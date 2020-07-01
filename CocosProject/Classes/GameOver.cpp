@@ -45,26 +45,22 @@ bool GameOver::init()
 
 	auto go_menu = Btn_goMenu::create("popmenuUI.png");
 	go_menu->setAnchorPoint(Vec2(0, 0));
-	go_menu->setPosition(380, 50);
+	go_menu->setPosition(390, 50);
 	go_menu->setScale(0.13f);
 	go_menu->setPriorityWithThis(true);
 	this->addChild(go_menu);
 
 	auto coin = Label::createWithTTF("%3d", "fonts/Maplestory Bold.ttf", 30);
 	coin->setString(StringUtils::format("%3d", myCoin));
-	coin->setPosition(550, 333);
+	coin->setPosition(575, 355);
 	coin->setColor(Color3B::WHITE);
 	this->addChild(coin);
 
 	auto time = Label::createWithTTF("%3d", "fonts/Maplestory Bold.ttf", 30);
 	time->setString(StringUtils::format("%3d", time_count));
-	time->setPosition(550, 228);
+	time->setPosition(575, 240);
 	time->setColor(Color3B::WHITE);
 	this->addChild(time);
-
-	//timer_label->setPosition(380, 100);
-	//timer_label->setString(StringUtils::format("Time : %3d", parent->time_count));
-
 
 	return true;
 }
@@ -74,18 +70,4 @@ void GameOver::GoBack(Ref*sender)
 	SimpleAudioEngine::getInstance()->unloadEffect("EndGameSound.wav");
 
 	this->removeFromParentAndCleanup(true);
-}
-
-void GameOver::SceneMove(Ref*sender)
-{	
-//유닛 모음 창 생성
-//	auto go_menu = Label::createWithSystemFont("유닛", "DAON_2.28(L)", 20);
-//	auto go_menuitem = MenuItemLabel::create(go_menu, CC_CALLBACK_1(GameOver::SceneMove(), this));
-//	go_menuitem->setColor(Color3B(0, 0, 0));
-//	go_menuitem->setAnchorPoint(ccp(0, 0)); //중심점이 좌측 하단
-//	go_menuitem->setPosition(Point(380, 50));
-//
-//	auto menu = Menu::create(go_menu, NULL);
-//	this->addChild(menu);
-//	Director::getInstance()->replaceScene(StageScene::createScene());
 }

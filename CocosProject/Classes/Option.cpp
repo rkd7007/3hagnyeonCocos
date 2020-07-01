@@ -22,12 +22,12 @@ bool Option::init()
 
 	auto winSize = Director::getInstance()->getOpenGLView()->getDesignResolutionSize();
 
-	//유닛 구매 팝업 창
+	//How Play Game 팝업 창
 	auto Pop = Sprite::create("popOption.png");
 	Pop->setAnchorPoint(Vec2(0, 0));
 	Pop->setScaleX(0.22);
 	Pop->setScaleY(0.22);
-	Pop->setPosition(Vec2(80, 0));
+	Pop->setPosition(Vec2(80, -20));
 	this->addChild(Pop);
 
 	//x버튼

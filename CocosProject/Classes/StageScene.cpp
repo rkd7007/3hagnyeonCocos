@@ -61,7 +61,17 @@ bool StageScene::init()
 	option->setPosition(Vec2(870, 20));
 	option->setScale(0.25);
 
-	auto menu = Menu::create(stage1, stage2, stage3, option, NULL);
+	auto handicap = MenuItemImage::create("handicp.png", "howPlayUI_click.png", CC_CALLBACK_1(StageScene::popupOption, this));
+	handicap->setAnchorPoint(Vec2(0, 0));
+	handicap->setPosition(Vec2(870, 85));
+	handicap->setScale(0.3);
+
+	auto select = MenuItemImage::create("stageSelect.png", "howPlayUI_click.png", CC_CALLBACK_1(StageScene::popupOption, this));
+	select->setAnchorPoint(Vec2(0, 0));
+	select->setPosition(Vec2(130, 430));
+	select->setScale(0.75);
+
+	auto menu = Menu::create(stage1, stage2, stage3, option, handicap, select, NULL);
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu);
 

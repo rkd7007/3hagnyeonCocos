@@ -37,19 +37,13 @@ bool InGame::init()
 	this->scheduleUpdate();
 	
 	//유닛 속성 뽑는 팝업 창 생성
-	auto buy_unit_bakcUI = Sprite::create("buyUnitUi.png");
+	auto buy_unit_bakcUI = MenuItemImage::create("buyUnitUi.png", "", CC_CALLBACK_1(InGame::popUnit, this));
 	buy_unit_bakcUI->setAnchorPoint(Vec2(0, 0));
-	buy_unit_bakcUI->setScale(0.12);
 	buy_unit_bakcUI->setPosition(Vec2(750, 10));
-	this->addChild(buy_unit_bakcUI);
+	buy_unit_bakcUI->setScale(0.12);
 
-	auto label_chose_unit = Label::createWithTTF("유닛 구매", "fonts/Maplestory Light.ttf", 20);
-	auto Unititem = MenuItemLabel::create(label_chose_unit, CC_CALLBACK_1(InGame::popUnit, this));
-	Unititem->setColor(Color3B(0, 0, 0));
-	Unititem->setAnchorPoint(ccp(1, 1)); //중심점이 우측 상단
-	Unititem->setPosition(Point(winSize.width - 600, winSize.height - 770));
-
-	auto menu = Menu::create(Unititem, NULL);
+	auto menu = Menu::create(buy_unit_bakcUI, NULL);
+	menu->setPosition(Point::ZERO);
 	this->addChild(menu);
 
 	createUnit(); //초기 랜덤 캐릭터 세마리 생성
@@ -113,20 +107,6 @@ void InGame::BaseFunc()
 	Hp_label->setPosition(Vec2(730, 510));
 	Hp_label->setColor(Color3B::BLACK);
 	this->addChild(Hp_label);
-
-	//죽인 적의 수
-	//killenemy_label = Label::createWithSystemFont("kill : ", "DAON_2.28(L)", 30);
-	//killenemy_label->setPosition(Vec2(400, 510));
-	//killenemy_label->setColor(Color3B::BLACK);
-	//this->addChild(killenemy_label);
-
-	//스테이지 바꿈
-	//auto item = MenuItemFont::create("STAGE", CC_CALLBACK_1(InGame::changeScene, this));
-	//item->setColor(Color3B::BLACK);
-	//auto menu = Menu::create(item, NULL);
-	//menu->setPosition(Vec2(900, 30));
-	//menu->alignItemsHorizontally();
-	//this->addChild(menu);
 }
 
 void InGame::update(float f)
@@ -176,7 +156,7 @@ void InGame::timer(float f)
 	time_count = time_count -1;
 	timer_label->setString(StringUtils::format("%3d", time_count)); //레이블 수정
 
-	if (time_count == -1) //0이 보이고 1초후 게임종료
+	if (time_count == 0) //0이 보이고 1초후 게임종료
 	{
 		//게임 종료
 		SimpleAudioEngine::getInstance()->unloadEffect("GunSound.wav"); //메모리에서 효과음 삭제
@@ -194,28 +174,6 @@ void InGame::timer_for_monsterOut(float f)
 
 void InGame::createBullet()
 {
-	//indexBullet += 1;
-
-	//SimpleAudioEngine::getInstance()->preloadEffect("GunSound.wav"); //메모리에 효과음 저장
-	//SimpleAudioEngine::getInstance()->playEffect("GunSound.wav", false); //효과음출력
-
-	//pBullet[indexBullet] = Sprite::create("ball.png");
-	//pBullet[indexBullet]->setPosition(Vec2(testPointX[testCount] + 50, testPointY[testCount]));
-
-	//this->addChild(pBullet[indexBullet]);
-
-	////auto SmokeParticle = ParticleSmoke::create();
-	////SmokeParticle->setDuration(0.1f); //출력 시간
-	////SmokeParticle->setSpeed(100); //진행 시간
-	////SmokeParticle->setGravity(Point(0, 300)); //y축으로 중력을 300정도 지정
-	////SmokeParticle->setAutoRemoveOnFinish(true); //파티클 지속시간 종료 후 자동제거
-	////SmokeParticle->setPosition(Vec2(pBullet[indexBullet]->getPositionX(), pBullet[indexBullet]->getPositionY()));
-	////this->addChild(SmokeParticle);
-
-	//auto myActionForward = MoveTo::create(1, Vec2(950, testPointY[testCount])); //정면으로 날리기
-	//auto myAction = Sequence::create(Place::create(Vec2(testPointX[testCount] + 50, testPointY[testCount])), myActionForward, nullptr); //원래 위치로 바꾸기
-	//pBullet[indexBullet]->runAction(myAction);
-
 	SimpleAudioEngine::getInstance()->preloadEffect("GunSound.wav"); //메모리에 효과음 저장
 	SimpleAudioEngine::getInstance()->playEffect("GunSound.wav", false); //효과음출력
 
@@ -328,96 +286,6 @@ void InGame::createEnemy()
 	}
 }
 
-//void InGame::createEnemy2()
-//{
-//	auto cache2 = SpriteFrameCache::getInstance();
-//	cache2->addSpriteFramesWithFile("shark.plist");
-//	pEnemy2 = Sprite::createWithSpriteFrameName("s1-removebg-preview.png");
-//
-//	//적 랜덤 좌표 등장
-//	int rnd = rand() % 4; //0~3
-//
-//	if (rnd == 0) //첫번째칸
-//	{
-//		Enemy_y = 380;
-//		int rnd2 = rand() % 3 + 1;
-//
-//		if (rnd2 == 1) //두번째칸
-//			Enemy_y2 = 300;
-//		if (rnd2 == 2) //세번째칸
-//			Enemy_y2 = 220;
-//		if (rnd2 == 3) //네번째칸
-//			Enemy_y2 = 140;
-//	}
-//
-//	if (rnd == 1) //두번째칸
-//	{
-//		Enemy_y = 300;
-//		int rnd2 = rand() % 4;
-//
-//		if (rnd == 0) //첫번째칸
-//			Enemy_y2 = 380;
-//		if (rnd == 1) //두번째칸
-//			rnd2 = rand() % 4;
-//		if (rnd == 2) //세번째칸
-//			Enemy_y2 = 220;
-//		if (rnd == 3) //네번째칸
-//			Enemy_y2 = 140;
-//	}
-//
-//	if (rnd == 2) //세번째칸
-//	{
-//		Enemy_y = 220;
-//		int rnd2 = rand() % 4;
-//
-//		if (rnd == 0) //첫번째칸
-//			Enemy_y2 = 380;
-//		if (rnd == 1) //두번째칸
-//			Enemy_y2 = 300;
-//		if (rnd == 2) //세번째칸
-//			rnd2 = rand() % 4;
-//		if (rnd == 3) //네번째칸
-//			Enemy_y2 = 140;
-//	}
-//
-//	if (rnd == 3) //네번째칸
-//	{
-//		Enemy_y = 140;
-//		int rnd2 = rand() % 3;
-//
-//		if (rnd == 0) //첫번째칸
-//			Enemy_y2 = 380;
-//		if (rnd == 1) //두번째칸
-//			Enemy_y2 = 300;
-//		if (rnd == 2) //세번째칸
-//			Enemy_y2 = 140;
-//	}
-//
-//	Enemy_x2 = 900;
-//
-//	//2번째 적
-//	pEnemy2->setPosition(Point(Enemy_x2, Enemy_y2));
-//	pEnemy2->setScale(0.8f);
-//	pEnemy2->setFlipX(true);
-//	this->addChild(pEnemy2);
-//	auto animation2 = Animation::create();
-//	animation2->setDelayPerUnit(0.2f);
-//	for (int i = 1; i < 3; i++)
-//	{
-//		auto frame2 = cache2->getSpriteFrameByName(StringUtils::format("s%d-removebg-preview.png", i));
-//		animation2->addSpriteFrame(frame2);
-//	}
-//
-//	auto animate2 = Animate::create(animation2);
-//	auto action2 = RepeatForever::create(animate2);
-//	pEnemy2->runAction(action2);
-//
-//	auto action_test2 = MoveTo::create(4, Vec2(0, Enemy_y2));//왼쪽
-//
-//	pEnemy2->runAction(action_test2);
-//}
-
-
 void InGame::doBuyWindUnit(std::string tableName)
 {
 	if (tableName == "fish"  && testCount < 16)
@@ -486,10 +354,7 @@ void InGame::doBuyWindUnit(std::string tableName)
 		testPointX[testCount] = 100; //캐릭터x값 
 
 		if (testPointY[testCount] <= 100)
-		{
 			testPointY[testCount] = 380;
-			/*testPointX[testCount] += 80;*/
-		}
 
 		if (testCount >= 4 && testCount != 0)
 		{
@@ -761,21 +626,11 @@ void InGame::tick1(float f)
 	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
 		if (pBullet[indexBullet] == nullptr)
-		{
 			this->createBullet(); //총알 생성		
-		}
 	}
 
 	if (pEnemy == nullptr)
-	{
 		this->createEnemy(); //적 생성
-	}
-
-	//if (pEnemy2 == nullptr)
-	//{
-	//	this->createEnemy2(); //적 생성
-	//}
-
 
 	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
@@ -785,10 +640,6 @@ void InGame::tick1(float f)
 
 	Enemy_x = pEnemy->getPosition().x;
 	Enemy_y = pEnemy->getPosition().y;
-
-	//Enemy_x2 = pEnemy2->getPosition().x;
-	//Enemy_y2 = pEnemy2->getPosition().y;
-
 
 	for (int indexBullet = 0; indexBullet <= testCount; ++indexBullet)
 	{
@@ -807,22 +658,6 @@ void InGame::tick1(float f)
 			bChange = true;
 		}
 
-		//if ((Bullet_x[indexBullet] <= Enemy_x2 + 149 && Bullet_x[indexBullet] >= Enemy_x2 - 149)
-		//	&& (Bullet_y[indexBullet] <= Enemy_y2 + 50 && Bullet_y[indexBullet] >= Enemy_y2 - 50))
-		//{
-		//	SimpleAudioEngine::getInstance()->preloadEffect("Item Purchase.wav"); //메모리에 효과음 저장
-		//	SimpleAudioEngine::getInstance()->playEffect("Item Purchase.wav", false); //효과음출력
-
-
-		//	pBullet[indexBullet]->removeFromParentAndCleanup(true); //총알제거
-		//	pBullet[indexBullet] = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
-
-		//	myCoin += 5;
-		//	coin_label->setString(StringUtils::format("%3d", myCoin)); //레이블 수정
-
-		//	bChange2 = true;
-		//}
-
 		if (Enemy_x <= 20 && !bChange) //왼쪽 끝에 도달하면
 		{
 			bChange = true;
@@ -830,14 +665,6 @@ void InGame::tick1(float f)
 			hp_count -= 1;
 			Hp_label->setString(StringUtils::format("%3d", hp_count)); //레이블 수정
 		}
-
-		//if (Enemy_x2 <= 20 && !bChange2) //왼쪽 끝에 도달하면
-		//{
-		//	bChange2 = true;
-
-		//	hp_count -= 1;
-		//	Hp_label->setString(StringUtils::format("%3d", hp_count)); //레이블 수정
-		//}
 	}
 	if (bChange)
 	{
@@ -845,13 +672,6 @@ void InGame::tick1(float f)
 		pEnemy = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
 		bChange = false;
 	}
-
-	//if (bChange2)
-	//{
-	//	pEnemy2->removeFromParentAndCleanup(true); //적제거
-	//	pEnemy2 = nullptr; // 일정시간 사용이 없기 전 가지는 객체정보가 남아 있으므로 반드시 nullptr로 처리해야 새로 생성가능..
-	//	bChange2 = false;
-	//}
 
 	if (hp_count <= 0)//사운드출력이 한번만 되어야하는데, 여러번 됨
 	{

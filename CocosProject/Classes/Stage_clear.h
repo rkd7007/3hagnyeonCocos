@@ -15,7 +15,6 @@ class Stage_clear : public cocos2d::Layer
 {
 public:
 	virtual bool init();
-	void SceneMove(Ref*sender);
 
 	void GoBack(Ref * sender);
 	CREATE_FUNC(Stage_clear);
